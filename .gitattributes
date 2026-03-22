@@ -1,0 +1,3 @@
+*.json linguist-generated
+*.log linguist-generated
+*.log.tmp linguist-generated
