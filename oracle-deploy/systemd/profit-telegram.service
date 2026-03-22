@@ -1,0 +1,15 @@
+[Unit]
+Description=Profit Telegram Bot
+After=network.target ollama.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/profit
+ExecStart=/usr/bin/python3 telegram_bot.py
+Restart=always
+RestartSec=10
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target

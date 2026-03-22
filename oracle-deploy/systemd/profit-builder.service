@@ -1,0 +1,14 @@
+[Unit]
+Description=Profit Autonomous Builder
+After=network.target ollama.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/profit
+ExecStart=/bin/bash autonomous-builder.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

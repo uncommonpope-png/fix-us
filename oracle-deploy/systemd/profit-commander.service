@@ -1,0 +1,14 @@
+[Unit]
+Description=Profit Bot Commander
+After=network.target ollama.service profit-soul.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/profit
+ExecStart=/bin/bash bot-commander.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
