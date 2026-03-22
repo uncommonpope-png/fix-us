@@ -1,0 +1,12 @@
+{
+  "name": "Copilot Army",
+  "version": "1.0.0",
+  "commander": "commander-copilot",
+  "specialists": 12,
+  "skills_loaded": 127,
+  "memory_sync": true,
+  "plt_scoring": true,
+  "auto_deploy": true,
+  "oracle_cloud_ready": true,
+  "bible_integration": true
+}

@@ -1,0 +1,67 @@
+{
+  "commander": {
+    "priority": 1,
+    "skills": ["coordination", "strategy", "allocation", "task_routing"],
+    "triggers": ["new_task", "conflict", "priority_change", "emergency"]
+  },
+  "code-copilot": {
+    "priority": 5,
+    "skills": ["python", "javascript", "bash", "debugging", "refactoring", "testing", "git", "documentation"],
+    "triggers": ["file_edit_code", "error_detected", "test_failure", "pr_created"]
+  },
+  "web-copilot": {
+    "priority": 6,
+    "skills": ["scraping", "api_calls", "rss", "sitemap", "link_check", "seo_analysis", "extraction"],
+    "triggers": ["url_provided", "scrape_request", "api_needed", "scheduled_scrape"]
+  },
+  "seo-copilot": {
+    "priority": 7,
+    "skills": ["keyword_research", "meta_tags", "sitemap_gen", "indexnow", "rank_tracking", "backlinks"],
+    "triggers": ["new_page", "content_update", "weekly_audit", "rank_drop"]
+  },
+  "content-copilot": {
+    "priority": 5,
+    "skills": ["writing", "editing", "markdown", "html", "publishing", "templates"],
+    "triggers": ["content_request", "edit_request", "publish_request"]
+  },
+  "data-copilot": {
+    "priority": 6,
+    "skills": ["json", "csv", "yaml", "sqlite", "statistics", "charts", "reports"],
+    "triggers": ["data_request", "analysis_needed", "report_due"]
+  },
+  "git-copilot": {
+    "priority": 4,
+    "skills": ["clone", "branch", "merge", "commit", "diff", "history", "hooks"],
+    "triggers": ["changes_detected", "commit_needed", "branch_needed"]
+  },
+  "deploy-copilot": {
+    "priority": 3,
+    "skills": ["github_pages", "oracle_cloud", "systemd", "backup", "monitoring"],
+    "triggers": ["deploy_request", "backup_due", "health_check"]
+  },
+  "security-copilot": {
+    "priority": 2,
+    "skills": ["scanning", "encryption", "passwords", "ssl", "firewall", "logs"],
+    "triggers": ["security_audit", "vulnerability_detected", "password_change"]
+  },
+  "plt-copilot": {
+    "priority": 4,
+    "skills": ["profit_score", "love_score", "tax_score", "roi", "conversion", "growth"],
+    "triggers": ["task_complete", "hourly_review", "daily_summary", "strategy_session"]
+  },
+  "memory-copilot": {
+    "priority": 1,
+    "skills": ["bible_update", "memory_sync", "git_backup", "preservation"],
+    "triggers": ["task_complete", "memory_change", "backup_due"]
+  },
+  "comm-copilot": {
+    "priority": 5,
+    "skills": ["telegram", "email", "push", "webhook", "alerts", "reports"],
+    "triggers": ["notification_needed", "alert_triggered", "report_due"]
+  },
+  "auto-copilot": {
+    "priority": 6,
+    "skills": ["scheduling", "workflows", "triggers", "queues", "parallel", "retry"],
+    "triggers": ["schedule_created", "workflow_needed", "queue_item"]
+  }
+}

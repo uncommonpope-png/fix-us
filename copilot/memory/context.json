@@ -3,7 +3,7 @@
   "start_time": null,
   "files_changed": [
     "M copilot/memory/context.json",
-    "?? copilot/memory/history.jsonl"
+    "?? copilot-army/"
   ],
   "plt_scores": [],
   "ollama_running": true,
