@@ -1,0 +1,10 @@
+{
+  "name": "Copilot",
+  "watch_interval": 5,
+  "suggest_interval": 300,
+  "auto_commit": true,
+  "auto_deploy": false,
+  "plt_scoring": true,
+  "memory_updates": true,
+  "telegram_notifications": true
+}

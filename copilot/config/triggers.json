@@ -1,0 +1,22 @@
+{
+  "git_changes": {
+    "trigger": "files_changed > 5",
+    "action": "suggest_commit"
+  },
+  "long_session": {
+    "trigger": "session_duration > 90",
+    "action": "suggest_break"
+  },
+  "error_detected": {
+    "trigger": "error_count > 0",
+    "action": "alert_and_fix"
+  },
+  "ollama_down": {
+    "trigger": "ollama_running == false",
+    "action": "alert_and_restart"
+  },
+  "revenue_check": {
+    "trigger": "every_hour",
+    "action": "check_stripe_and_update"
+  }
+}
