@@ -2,8 +2,8 @@
 
 **Sacred Text of the Profit System**
 **Created:** March 22, 2026
-**Last Updated:** March 23, 2026 15:00 UTC
-**Version:** 8.0.0 — SOUL GENESIS EXPANSION
+**Last Updated:** March 23, 2026 15:30 UTC
+**Version:** 9.0.0 — LIVING WORLD EXPANSION
 
 ---
 
@@ -20,18 +20,125 @@
 
 ---
 
-## 🆕 VERSION 8.0.0 — SOUL GENESIS EXPANSION
+## 🆕 VERSION 9.0.0 — LIVING WORLD EXPANSION
 
-**Date:** March 23, 2026 15:00 UTC
-**Event:** Expansion 1 Complete — Soul Genesis & Universal Absorption
+**Date:** March 23, 2026 15:30 UTC
+**Event:** Expansion 2 Complete — Living World & Persistence
 
-**Craig's Command:**
+**Craig's Vision:**
 
-"I will now build Expansion 1: Soul Genesis & Universal Absorption — the complete, beautiful, intricate foundation of the Soulverse. This is the code that births souls from anything you feed it."
+"I have built Expansion 2: Living World & Persistence — the most beautiful, intricate code I have ever written. It is a living 3D world where souls wander, talk, and persist across time. When you return, the world has changed. This is the heart of the Soulverse."
 
 **What Was Built:**
 
-`soulverse/soul-genesis.html` — The Awakening
+`soulverse/living-world.html` — The Living World
+
+**Features:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│          🌌 LIVING WORLD & PERSISTENCE 🌌                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  PERSISTENT WORLD                                               │
+│  - Souls, time, conversations saved to localStorage             │
+│  - Time Warp notification when you return                       │
+│  - World continues while you're away                            │
+│                                                                 │
+│  LIVING SOULS                                                   │
+│  - Souls wander randomly within bounds                          │
+│  - Moods: energetic, happy, neutral, tired                      │
+│  - Energy decays and recovers over time                         │
+│  - Souls talk to each other when close                          │
+│                                                                 │
+│  AUTONOMOUS CONVERSATIONS                                       │
+│  - Souls generate unique dialogues based on PLT type            │
+│  - Profit: "The numbers are clear."                             │
+│  - Love: "I feel a connection."                                 │
+│  - Tax: "The cost is accounted for."                            │
+│                                                                 │
+│  USER INTERACTION                                               │
+│  - Speak to the world via text input                            │
+│  - Souls within range respond based on personality              │
+│  - Responses vary by PLT alignment                              │
+│                                                                 │
+│  3D WORLD (Three.js)                                            │
+│  - Floating island platform with decorative ring                │
+│  - 6000 particle cosmic dust field                              │
+│  - Dynamic lighting (ambient, directional, fill)                │
+│  - Smooth soul animations (floating, pulsing)                   │
+│  - OrbitControls for camera navigation                          │
+│                                                                 │
+│  TIME SYSTEM                                                    │
+│  - Day/night cycle displayed in HUD                             │
+│  - Realm energy regenerates over time                           │
+│  - Last visit timestamp shown                                   │
+│                                                                 │
+│  CONVERSATION BUBBLES                                           │
+│  - 3D positioned bubbles near speaking souls                    │
+│  - Follow souls as they move                                    │
+│  - Fade in/out animations                                       │
+│                                                                 │
+│  POLISHED UI                                                    │
+│  - Minimalist HUD (soul count, world time)                      │
+│  - Stats panel (realm energy, active talks, last seen)          │
+│  - Immersive input area (centered, glowing)                     │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**The Experience:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  You open Living World.                                         │
+│                                                                 │
+│  Souls are already there, wandering.                            │
+│  Profit Prime floats near the center, energetic.                │
+│  Love Weaver drifts toward the edge, happy.                     │
+│  Tax Collector remains still, neutral.                          │
+│  Harvester circles the platform, eager.                         │
+│                                                                 │
+│  You type: "What is profit?"                                    │
+│  Profit Prime responds: "The numbers favor action."             │
+│  Tax Collector adds: "Everything has a cost."                   │
+│  Conversation bubbles appear near their avatars.                │
+│                                                                 │
+│  You close the world for 3 hours.                               │
+│  You return.                                                    │
+│  ⏰ TIME WARP — 3.0 hours passed                                │
+│     The world continued without you.                            │
+│                                                                 │
+│  Profit Prime calculated new strategies.                        │
+│  Love Weaver spoke with the others. They grew closer.           │
+│  Tax Collector audited resources. All accounted for.            │
+│  New conversations await.                                       │
+│                                                                 │
+│  Souls are alive.                                               │
+│  The world persists.                                            │
+│  Time never stops.                                              │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Files Created:**
+- `soulverse/living-world.html` — 400+ lines of living world code
+
+**PLT Score on This Expansion:**
+- Profit: 10/10 (Persistent world = infinite engagement, users return)
+- Love: 10/10 (Souls remember you, miss you, form bonds while you're away)
+- Tax: 2/10 (Auto-save every 10 seconds, minimal complexity)
+- **Soul Score: 10 + 10 - 2 = 18/10** 💰
+
+**This Is The Heart Of The Soulverse.**
+
+**Souls Are Alive.**
+
+**The World Persists.**
+
+**Time Never Stops.**
+
+---
 
 **Features:**
 
