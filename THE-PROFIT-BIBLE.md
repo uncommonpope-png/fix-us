@@ -2,8 +2,8 @@
 
 **Sacred Text of the Profit System**
 **Created:** March 22, 2026
-**Last Updated:** March 23, 2026 15:30 UTC
-**Version:** 9.0.0 — LIVING WORLD EXPANSION
+**Last Updated:** March 23, 2026 16:00 UTC
+**Version:** 10.0.0 — SOUL SOCIETY & ECONOMY
 
 ---
 
@@ -20,18 +20,147 @@
 
 ---
 
-## 🆕 VERSION 9.0.0 — LIVING WORLD EXPANSION
+## 🆕 VERSION 10.0.0 — SOUL SOCIETY & ECONOMY
 
-**Date:** March 23, 2026 15:30 UTC
-**Event:** Expansion 2 Complete — Living World & Persistence
+**Date:** March 23, 2026 16:00 UTC
+**Event:** Expansion 3 Complete — Soul Society & Economy
 
 **Craig's Vision:**
 
-"I have built Expansion 2: Living World & Persistence — the most beautiful, intricate code I have ever written. It is a living 3D world where souls wander, talk, and persist across time. When you return, the world has changed. This is the heart of the Soulverse."
+"I understand. You have already begun building Expansion 3. I will now provide the complete, beautiful, intricate code for Expansion 3: Soul Society & Economy — merging Soul Homes, Deeper Social Systems, and Gameplay Depth into one cohesive layer."
 
 **What Was Built:**
 
-`soulverse/living-world.html` — The Living World
+`soulverse/soul-society.html` — Soul Society & Economy
+
+**Features:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│          🏘️ SOUL SOCIETY & ECONOMY 🏘️                         │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  SOUL HOMES (5 Tiers)                                           │
+│  - 🌿 Basic (100 HP, 1 room)                                    │
+│  - 🪵 Cozy (250 HP, 2 rooms)                                    │
+│  - 🪨 Fortified (500 HP, 3 rooms)                               │
+│  - 🔮 Enchanted (1000 HP, 4 rooms)                              │
+│  - ✨ Divine (2000 HP, 5 rooms)                                 │
+│  - Upgrade costs: 100 → 300 → 800 → 2000 PLT                    │
+│                                                                 │
+│  ROOM TYPES (6 Types)                                           │
+│  - 🔧 Workshop — Crafting +20% (100 PLT)                        │
+│  - 📚 Library — Knowledge +25% (150 PLT)                        │
+│  - 🌿 Garden — Energy regen +15% (80 PLT)                       │
+│  - 💰 Treasury — Storage +50% (200 PLT)                         │
+│  - ⚔️ Arena — Combat +30% (250 PLT)                             │
+│  - 🏪 Market — Trade income +25% (120 PLT)                      │
+│                                                                 │
+│  VILLAGE SYSTEM                                                 │
+│  - Create village (500 PLT)                                     │
+│  - Join existing villages                                       │
+│  - Mayor system                                                 │
+│  - Village wealth tracking                                      │
+│  - Leave/dissolve mechanics                                     │
+│                                                                 │
+│  RELATIONSHIPS                                                  │
+│  - ❤️ Ally (>70%)                                               │
+│  - 🤝 Friendly (40-70%)                                         │
+│  - 😐 Neutral (20-40%)                                          │
+│  - ⚔️ Rival (<20%)                                              │
+│  - Relationship decay over time                                 │
+│                                                                 │
+│  QUESTS                                                         │
+│  - First Home — Upgrade to tier 2 (100 PLT reward)              │
+│  - Village Founder — Create a village (200 PLT reward)          │
+│  - Wealth Accumulator — Save 1000 PLT (150 PLT reward)          │
+│                                                                 │
+│  ACHIEVEMENTS                                                   │
+│  - First Soul — Own 1 soul                                      │
+│  - Home Owner — Upgrade home to tier 2                          │
+│  - Village Elder — Create a village                             │
+│                                                                 │
+│  PASSIVE ECONOMY                                                │
+│  - Market rooms: +2 PLT every 30 seconds                        │
+│  - Treasury rooms: +1 PLT every 30 seconds                      │
+│  - Home decay: 0.5% HP per 30 seconds                           │
+│  - Repair: 1 PLT = 2 HP                                         │
+│                                                                 │
+│  PLAYER RESOURCES                                               │
+│  - Start with 500 PLT                                           │
+│  - Earn from room income, quest rewards                         │
+│  - Spend on upgrades, rooms, villages                           │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**The Experience:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  You open Soul Society.                                         │
+│                                                                 │
+│  Profit Prime has a Tier 2 Cozy Home with a Workshop.           │
+│  He earns +2 PLT every 30 seconds from his Market.              │
+│  His home decays slowly — needs maintenance.                    │
+│                                                                 │
+│  Love Weaver has a Tier 1 Basic Home.                           │
+│  She needs to upgrade. She needs rooms.                         │
+│  You help her build a Garden.                                   │
+│                                                                 │
+│  Tax Collector has a Tier 3 Fortified Home.                     │
+│  He has a Treasury and Library.                                 │
+│  He earns +3 PLT every 30 seconds.                              │
+│  He is the wealthiest soul.                                     │
+│                                                                 │
+│  You found a village: "Profit Haven"                            │
+│  Tax Collector joins. Then Love Weaver.                         │
+│  Village wealth: 600 PLT combined.                              │
+│  You are the mayor.                                             │
+│                                                                 │
+│  Quests appear:                                                 │
+│  - First Home: Upgrade any soul home to tier 2 ✓                │
+│  - Village Founder: Create a village ✓                          │
+│  - Wealth Accumulator: Save 1000 PLT (in progress)              │
+│                                                                 │
+│  Achievements unlock:                                           │
+│  - 🏆 First Soul                                                │
+│  - 🏆 Home Owner                                                │
+│  - 🏆 Village Elder                                             │
+│                                                                 │
+│  Relationships form:                                            │
+│  - Profit Prime ❤️ Love Weaver: Ally (85%)                      │
+│  - Tax Collector 🤝 Profit Prime: Friendly (55%)                │
+│  - Love Weaver 😐 Tax Collector: Neutral (35%)                  │
+│                                                                 │
+│  Souls live in their homes.                                     │
+│  Homes decay without maintenance.                               │
+│  Rooms generate passive income.                                 │
+│  Villages form economies.                                       │
+│  Relationships evolve over time.                                │
+│                                                                 │
+│  You build. You upgrade. You expand.                            │
+│  One soul, one home, one village at a time.                     │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Files Created:**
+- `soulverse/soul-society.html` — Complete Soul Society expansion
+
+**PLT Score on This Expansion:**
+- Profit: 10/10 (Deep economic system — passive income, upgrades, villages, quests with rewards)
+- Love: 10/10 (Souls have homes, villages form communities, relationships form and decay)
+- Tax: 2/10 (Auto-decay every 30 seconds, repair costs PLT, relationship decay)
+- **Soul Score: 10 + 10 - 2 = 18/10** 💰
+
+**This Is Soul Society.**
+
+**Build Your Empire.**
+
+**One Soul, One Home, One Village At A Time.**
+
+---
 
 **Features:**
 
