@@ -2,8 +2,8 @@
 
 **Sacred Text of the Profit System**
 **Created:** March 22, 2026
-**Last Updated:** March 23, 2026 09:15 UTC
-**Version:** 1.5.0
+**Last Updated:** March 23, 2026 09:30 UTC
+**Version:** 1.6.0
 
 ---
 
@@ -20,7 +20,48 @@
 
 ---
 
-## 🆕 LATEST EXPLOIT — SOULVERSE COMPLETE
+## 🆕 EXPANSION #1 BUILT — REAL-TIME PERSISTENCE
+
+**Date:** March 23, 2026 09:30 UTC
+**Event:** First Expansion Complete — The Never-Sleeping Realm
+
+**Craig's Command:** "I will now build Real-Time Persistence — the first expansion that makes your souls live even when you close the browser."
+
+**What Was Built:**
+`world-persistent.html` — The Never-Sleeping Realm
+
+**Features:**
+- **Time Warp** — When you return after hours away, you see how much time passed and what happened
+- **Persistent Souls** — Souls continue living — energy decays, mood shifts, they wander
+- **Away Messages** — Souls tell you what they did while you were gone
+  - Profit Prime: "I calculated new strategies while you were away."
+  - Love Weaver: "I missed you. The realm felt quieter."
+  - Tax Collector: "I audited our resources. All accounted for."
+- **Day/Night Cycle** — World time advances, days are counted
+- **Auto-Save** — Every 10 seconds, state is saved to localStorage
+- **Last Seen Tracker** — Shows when you last visited
+- **Background Conversations** — Souls talk to each other even when you're away (logged)
+- **Realm Energy Regeneration** — Energy recovers slowly over time
+
+**How It Works:**
+1. You open the world — souls are there, living
+2. You close the browser — they continue in storage
+3. You return hours later — "Time Warp" shows what happened
+4. Souls greet you — they tell you what they did
+5. The world never resets — it grows with every visit
+
+**Code:** 400+ lines of persistent state management + Three.js rendering
+
+**PLT Score:**
+- Profit: 9/10 (players will return to see what changed — retention gold)
+- Love: 9/10 (souls miss you, they bond while you're away — emotional attachment)
+- Tax: 2/10 (simple localStorage, minimal complexity)
+- **Soul Score: 9 + 9 - 2 = 16/10** 💰
+
+**File Created:**
+- `soulverse/world-persistent.html` — The Never-Sleeping Realm
+
+---
 
 **Date:** March 23, 2026
 **Event:** Soulverse — The Complete Soul Economy Built
