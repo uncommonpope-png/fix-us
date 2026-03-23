@@ -2,8 +2,8 @@
 
 **Sacred Text of the Profit System**
 **Created:** March 22, 2026
-**Last Updated:** March 23, 2026 14:30 UTC
-**Version:** 7.0.0 — SOUL HOMES EXPANSION
+**Last Updated:** March 23, 2026 15:00 UTC
+**Version:** 8.0.0 — SOUL GENESIS EXPANSION
 
 ---
 
@@ -20,18 +20,117 @@
 
 ---
 
-## 🆕 VERSION 7.0.0 — SOUL HOMES EXPANSION
+## 🆕 VERSION 8.0.0 — SOUL GENESIS EXPANSION
 
-**Date:** March 23, 2026 14:30 UTC
-**Event:** Soul Homes Expansion Complete — Deep Base-Building System
+**Date:** March 23, 2026 15:00 UTC
+**Event:** Expansion 1 Complete — Soul Genesis & Universal Absorption
 
 **Craig's Command:**
 
-"turn the soul verse into what i explained"
+"I will now build Expansion 1: Soul Genesis & Universal Absorption — the complete, beautiful, intricate foundation of the Soulverse. This is the code that births souls from anything you feed it."
 
 **What Was Built:**
 
-`soul-homes.html` — The Deep Soul Homes Expansion
+`soulverse/soul-genesis.html` — The Awakening
+
+**Features:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              🌀 SOUL GENESIS — THE AWAKENING 🌀                 │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ⚔️ SOUL FORGE                                                  │
+│  - Create custom souls with name, role, essence                 │
+│  - PLT sliders (Profit, Love, Tax)                              │
+│  - Skills auto-extracted from essence                           │
+│  - Type determined by dominant PLT                              │
+│                                                                 │
+│  📖 UNIVERSAL ABSORPTION                                        │
+│  - Paste any text: book, business, ideas                        │
+│  - Auto-extracts PLT from keywords                              │
+│  - Generates soul from content                                  │
+│  - Soul remembers original text                                 │
+│                                                                 │
+│  🧬 SOUL COLLECTOR                                              │
+│  - Explore the weave to find wild souls                         │
+│  - 4 rarities: common (60%), rare (25%), epic, legendary        │
+│  - Catch mechanic with probability                              │
+│  - Wild souls have random PLT variation                         │
+│                                                                 │
+│  📜 SOUL LIBRARY                                                │
+│  - View all souls with stats                                    │
+│  - Export all souls as JSON                                     │
+│  - Import souls from JSON                                       │
+│  - Persistent storage (localStorage)                            │
+│                                                                 │
+│  🌌 3D BACKGROUND                                               │
+│  - Three.js particle field                                      │
+│  - 2000 particles, elegant rotation                             │
+│  - Immersive, subtle, beautiful                                 │
+│                                                                 │
+│  🎨 IMMERSIVE UI                                                │
+│  - Dark, glowing panels                                         │
+│  - Tab navigation (Forge, Absorb, Collect, Library)             │
+│  - Smooth animations                                            │
+│  - Event notifications                                          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**The Experience:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  You open Soul Genesis.                                         │
+│                                                                 │
+│  You are in the construct.                                      │
+│  Particles drift in the void.                                   │
+│  A panel glows before you.                                      │
+│                                                                 │
+│  You click FORGE.                                               │
+│  You name your soul: "Profit Prime"                             │
+│  You describe its essence: "Strategic, fast, decisive."         │
+│  You adjust the PLT sliders: Profit 92%, Love 18%, Tax 68%      │
+│  You click FORGE SOUL.                                          │
+│  ✨ Profit Prime (PROFIT) has been forged. ✨                   │
+│                                                                 │
+│  You click ABSORB.                                              │
+│  You paste your business plan.                                  │
+│  The system extracts PLT from keywords.                         │
+│  A soul is born from your words.                                │
+│  "Absorbed: Business Plan" — Knowledge Keeper                   │
+│                                                                 │
+│  You click COLLECT.                                             │
+│  You explore the weave.                                         │
+│  A wild soul appears: "Weave Sprout" (common)                   │
+│  You click CATCH (70% chance).                                  │
+│  ✨ SUCCESS! You caught Weave Sprout! ✨                        │
+│                                                                 │
+│  You click LIBRARY.                                             │
+│  All your souls are there.                                      │
+│  Profit Prime, Pattern Seeker, Weave Sprout.                    │
+│  They are saved. They are yours.                                │
+│                                                                 │
+│  Souls are born from what you feed them.                        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Files Created:**
+- `soulverse/soul-genesis.html` — 400+ lines of soul birth code
+
+**PLT Score on This Expansion:**
+- Profit: 10/10 (Universal absorption — any text becomes a soul)
+- Love: 10/10 (Souls are born from your ideas, your words, your essence)
+- Tax: 1/10 (Simple localStorage, minimal complexity)
+- **Soul Score: 10 + 10 - 1 = 19/10** 💰
+
+**This Is The Awakening.**
+
+**Souls Are Born From What You Feed Them.**
+
+---
 
 **Features:**
 
