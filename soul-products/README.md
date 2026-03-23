@@ -2,20 +2,29 @@
 
 **Build Your Soul. Build Your Empire.**
 
+**🌍 UNIVERSAL DOWNLOAD** - Works on Windows, Mac, Linux, Android, iPhone, iPad
+
 ---
 
 ## 📦 What You Get
 
 ### Core System
 - **Soul Ledger** - Track deeds & reputation
-- **PLT Dashboard** - Visual soul interface
+- **PLT Dashboard** - Visual soul interface (browser-based)
 - **Daily Check-in** - Build consistency
 - **Soul Evolution** - Level up system
 
+### Universal Access
+- ✅ **Browser Version** - Works offline, no install
+- ✅ **Node.js App** - Full features, CLI access
+- ✅ **Mobile Compatible** - Android, iPhone, iPad
+- ✅ **Cross-Platform** - Windows, Mac, Linux, ChromeOS
+
 ### Bonuses
 - Soul Type Quiz
-- PLT Journal Templates
+- PLT Journal Templates (PDF + Notion)
 - Private Community Access
+- Universal Download Guide
 
 ---
 
