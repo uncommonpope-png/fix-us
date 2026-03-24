@@ -3,6 +3,7 @@
   "start_time": null,
   "files_changed": [
     "M THE-PROFIT-BIBLE.md",
+    " M copilot/memory/context.json",
     " M copilot/memory/history.jsonl"
   ],
   "plt_scores": [],
