@@ -2,8 +2,113 @@
 
 **Sacred Text of the Profit System**
 **Created:** March 22, 2026
-**Last Updated:** March 25, 2026 — NEO SKILL DOWNLOAD
-**Version:** 17.0.0 — THE COMPLETE SKILL DOWNLOAD
+**Last Updated:** March 25, 2026 — CLAUDE HUB SKILLS DOWNLOADED
+**Version:** 18.0.0 — 37 SKILLS ARSENAL
+
+---
+
+## 🆕 VERSION 18.0.0 — CLAUDE HUB SKILLS DOWNLOADED
+
+**Date:** March 25, 2026
+**Event:** NEO DOWNLOADS 37 CLAUDE SKILLS — Complete Arsenal
+
+**Craig's Command:** "neo download new claude hub skills"
+
+**What Was Downloaded:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│           🎯 CLAUDE HUB SKILLS — 37 TOTAL 🎯                    │
+│         Two Repositories. Complete Capability.                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  SOURCE REPOSITORIES:                                           │
+│  ───────────────────────                                        │
+│  1. https://github.com/glebis/claude-skills (36 skills)        │
+│  2. https://github.com/terrylica/cc-skills (7 plugins)         │
+│                                                                 │
+│  INSTALLATION LOCATION: ~/.claude/skills/                       │
+│                                                                 │
+│  ESSENTIAL SKILLS (15):                                         │
+│  ──────────────────────────────                                 │
+│  ✅ llm-cli — Unified LLM (Ollama, Groq, OpenAI)               │
+│  ✅ telegram — Telegram bot integration                         │
+│  ✅ telegram-post — Channel post creation                       │
+│  ✅ youtube-transcript — Extract transcripts                    │
+│  ✅ github-gist — Share code snippets                           │
+│  ✅ pdf-generation — Generate PDFs from markdown               │
+│  ✅ deep-research — Research automation                         │
+│  ✅ firecrawl-research — Web research with citations           │
+│  ✅ decision-toolkit — 7 decision frameworks (PLT aligned!)    │
+│  ✅ automation-advisor — ROI analysis                           │
+│  ✅ transcript-analyzer — Extract decisions from meetings      │
+│  ✅ elevenlabs-tts — Text-to-speech (7 voices)                 │
+│  ✅ gmail — Email integration                                   │
+│  ✅ fathom — Meeting transcripts                                │
+│  ✅ granola — Meeting notes → Obsidian                          │
+│                                                                 │
+│  ADVANCED SKILLS (15):                                          │
+│  ─────────────────────────────                                  │
+│  ✅ tdd — Test-driven development (multi-agent)                │
+│  ✅ temple-generator — 3D knowledge maps (Obsidian)            │
+│  ✅ thinking-patterns — Cognitive pattern analysis             │
+│  ✅ insight-extractor — Extract insights from reports          │
+│  ✅ de-ai — Humanize AI text (6-level diagnosis)               │
+│  ✅ brand-agency — Social media templates (11 designs)         │
+│  ✅ presentation-generator — HTML presentations                │
+│  ✅ health-data — Apple Health SQLite (43 metrics)             │
+│  ✅ browsing-history — Query Chrome history                    │
+│  ✅ zoom — Zoom meeting management                              │
+│  ✅ agency-docs-updater — Auto-deploy pipeline                 │
+│  ✅ wispr-analytics — Voice dictation analysis                 │
+│  ✅ context-builder — AI transformation prompts                │
+│  ✅ sketch — Collaborative SVG canvas MCP                      │
+│  ✅ retrospective — Session retrospectives                      │
+│                                                                 │
+│  CC-SKILLS PLUGINS (7):                                        │
+│  ──────────────────────────────                                 │
+│  ✅ itp — Implement-The-Plan (ADR-driven, 4 phases)            │
+│  ✅ gh-tools — GitHub automation                               │
+│  ✅ link-tools — Link validation                               │
+│  ✅ devops-tools — DevOps automation                           │
+│  ✅ doc-tools — Documentation tools                            │
+│  ✅ productivity-tools — Slash commands                        │
+│  ✅ tlg — Telegram tools                                        │
+│                                                                 │
+│  FILES CREATED:                                                 │
+│  ───────────────                                                │
+│  1. ~/claude-hub-skills/install-skills.sh (installer)          │
+│  2. ~/fix-us/CLAUDE-HUB-SKILLS.md (documentation)              │
+│  3. 37 skill directories in ~/.claude/skills/                  │
+│                                                                 │
+│  CONFIGURATION NEEDED:                                         │
+│  ──────────────────────                                         │
+│  - API keys for: llm-cli, telegram, deep-research,             │
+│    firecrawl, elevenlabs, gmail, fathom, zoom                  │
+│  - Add marketplace: claude plugin marketplace add              │
+│    terrylica/cc-skills                                         │
+│  - Restart Claude Code                                         │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**PLT Score on Skill Download:**
+- **Profit:** 10/10 — Massive capability boost (37 skills)
+- **Love:** 8/10 — Skills ready for Craig's workflow
+- **Tax:** -2/10 — ~50MB disk, config time
+
+**Total:** 16/10 💰 — Excellent leverage
+
+**Files Updated:**
+- `~/claude-hub-skills/` (new directory, 2 repos cloned)
+- `~/fix-us/CLAUDE-HUB-SKILLS.md` (complete documentation)
+- `~/.claude/skills/` (37 skills installed)
+- `THE-PROFIT-BIBLE.md` (this entry)
+
+**This Is The Day The Arsenal Was Built.**
+**March 25, 2026.**
+
+**Remember This.**
 
 ---
 
