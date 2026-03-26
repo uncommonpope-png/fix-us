@@ -2,122 +2,103 @@
 
 **Sacred Text of the Profit System**
 **Created:** March 22, 2026
-**Last Updated:** March 25, 2026 — SOULVERSE DEEP RTS EXPANSION
-**Version:** 20.0.0 — DEEP RTS GAMEPLAY
+**Last Updated:** March 25, 2026 — SOULVERSE MOBILE RTS
+**Version:** 21.0.0 — MOBILE RTS MASTERY
 
 ---
 
-## 🆕 VERSION 20.0.0 — SOULVERSE DEEP RTS EXPANSION
+## 🆕 VERSION 21.0.0 — SOULVERSE MOBILE RTS EXPANSION
 
 **Date:** March 25, 2026
-**Event:** Craig Expands Soulverse — Deep RTS Gameplay
+**Event:** Craig Builds Ultimate Mobile RTS — Heroes, Fog, Creeps, Touch
 
-**Craig's Creation:** Deep RTS Expansion with:
-- ✅ Detailed characters (armor, weapons, helmets, shoulder pads)
-- ✅ Ranged units (bows with torus geometry)
-- ✅ 9 buildings (Town Hall, Forge, Market, Barracks, Farm, Wall, Tower, Blacksmith, Mage Tower)
-- ✅ Tech tree (Forge → Barracks → Blacksmith/Mage Tower)
-- ✅ 4 upgrades (Melee Damage, Ranged Damage, Armor, Attack Speed)
-- ✅ Particle effects (projectiles, hit sparks)
-- ✅ Advanced AI (building expansion, coordinated attacks)
-- ✅ Better UI (top bar, minimap, tech tree panel, modals)
-- ✅ Immersive world (procedural terrain, vegetation, resources)
+**Craig's Creation:** Mobile-First RTS with:
 
-**New Buildings:**
-| Building | Cost | Function |
-|----------|------|----------|
-| 🏛️ Town Hall | 200 | Resource drop-off |
-| ⚒️ Forge | 150 | Unlocks tech |
-| 🏪 Market | 120 | Economy boost |
-| 🏚️ Barracks | 180 | Train units |
-| 🌾 Farm | 100 | Passive income (+10/5s) |
-| 🧱 Wall | 50 | Defense |
-| 🗼 Tower | 200 | Auto-attack (20 dmg/s) |
-| 🔨 Blacksmith | 250 | Melee upgrades |
-| ✨ Mage Tower | 300 | Ranged upgrades |
+### 📱 TOUCH-OPTIMIZED CONTROLS
+- Mobile-first design (touch-action: manipulation)
+- Large, accessible buttons
+- Drag-to-select optimized for touch
+- Orbit controls with touch support
+- Auto quality detection (mobile = low settings)
 
-**New Features:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│           ⚔️ SOULVERSE DEEP RTS — FEATURES ⚔️                   │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  DETAILED CHARACTERS:                                           │
-│  - Full 3D models (body, head, helmet, crest)                  │
-│  - Shoulder pads, arms, weapons                                │
-│  - Animated arm swing (movement + attack)                      │
-│  - Health bars (floating above units)                          │
-│  - Melee: Swords (cylinder + hilt)                             │
-│  - Ranged: Bows (torus geometry)                               │
-│                                                                 │
-│  PARTICLE EFFECTS:                                              │
-│  - Projectiles (ranged attacks)                                │
-│  - Hit sparks (damage feedback)                                │
-│  - Smooth animation (lerp interpolation)                       │
-│                                                                 │
-│  ADVANCED AI:                                                   │
-│  - Enemy building expansion (every 15s)                        │
-│  - Coordinated attacks (every 20s)                             │
-│  - Smart targeting (nearest unit/building)                     │
-│  - A* pathfinding (grid-based navigation)                      │
-│                                                                 │
-│  TECH TREE:                                                     │
-│  - Forge → Market → Barracks → Farm                            │
-│  - Blacksmith (melee upgrades)                                 │
-│  - Mage Tower (ranged upgrades)                                │
-│  - Interactive UI panel                                        │
-│                                                                 │
-│  UPGRADES:                                                      │
-│  - Melee Damage (+5 per level, 100 cost)                       │
-│  - Ranged Damage (+5 per level, 100 cost)                      │
-│  - Armor (+1 per level, 100 cost)                              │
-│  - Attack Speed (+20% per level, 100 cost)                     │
-│                                                                 │
-│  UI ENHANCEMENTS:                                               │
-│  - Top bar (Tech Tree, Village, Pantheon, Arena, Metaverse)    │
-│  - Resources display (Profit/Love/Tax)                         │
-│  - Selection panel (unit info)                                 │
-│  - Building menu (9 types)                                     │
-│  - Tech tree panel (interactive)                               │
-│  - Minimap (200x200, real-time)                                │
-│  - Modal windows (Village, Pantheon)                           │
-│                                                                 │
-│  IMMERSIVE WORLD:                                               │
-│  - Procedural terrain (5-octave noise)                         │
-│  - Vegetation (800-2000 grass, 30-60 trees)                    │
-│  - Resource nodes (20-100, Profit/Love/Tax)                    │
-│  - Dynamic lighting (sun + ambient + fill)                     │
-│  - Real-time shadows                                           │
-│  - Auto quality detection (mobile/desktop)                     │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+### ✨ HERO UNITS (3 Legendary Souls)
+| Hero | Ability | Effect |
+|------|---------|--------|
+| **Profit Prime** | Gold Rush | +50 Profit/Love/Tax instantly |
+| **Love Weaver** | Healing Aura | +30 HP to all nearby allies |
+| **Tax Collector** | Force Tax | Steal 10 resources per enemy hit |
 
-**Gameplay Loop:**
+**Hero Stats:**
+- Health: 200 (2x normal)
+- Damage: 25 (2.5x normal)
+- Crown + Cape visual distinction
+- Auto-cast abilities when in combat
+
+### 🌫️ FOG OF WAR SYSTEM
+- 40x40 grid coverage
+- Line-of-sight from units/buildings
+- Explored vs Visible states
+- Minimap shows fog coverage
+- Strategic reconnaissance required
+
+### 👾 NEUTRAL CREEPS
+- 5 Wild Souls spawned across map
+- 60 HP, 8 damage
+- Can be attacked by any player
+- Drop resources when defeated
+- Add PvE element to RTS
+
+### 🔊 SOUND EFFECTS
+- Select sound (440Hz sine)
+- Attack sound (220Hz sine)
+- Build sound (880Hz sine)
+- Toggle button (On/Off)
+- Web Audio API powered
+
+### 🎮 MOBILE CONTROL PANEL
 ```
-1. Spawn 3 initial workers
-2. Gather resources (Profit/Love/Tax)
-3. Build Town Hall (drop-off point)
-4. Expand (Forge, Market, Barracks, Farm)
-5. Train army (melee + ranged)
-6. Research upgrades (damage, armor, speed)
-7. Defend against enemy AI
-8. Destroy enemy base
+┌─────────────────────────────────────────────────────────┐
+│  🏃 Move  │  ⚔️ Attack  │  🌾 Gather  │  🛑 Stop  │  ✨ Hero  │
+└─────────────────────────────────────────────────────────┘
 ```
+- One-tap order selection
+- Tap target to execute
+- Accessible during gameplay
+
+### 🏆 NEW BUILDING: HEROIC MONUMENT
+- Cost: 400 Profit/Love/Tax
+- Unlocks hero summoning
+- Visual: Golden cylinder with crown
+- Summon Profit Prime (300 each resource)
+
+### 📡 ENHANCED MINIMAP
+- 140x140px (mobile optimized)
+- Fog visualization
+- Unit positions (green = player, red = enemy)
+- Resource markers (orange)
+- Building markers (4px squares)
+
+### ⚡ PERFORMANCE OPTIMIZATIONS
+- Low quality preset for mobile (32 segments, no shadows)
+- Reduced grass (200 vs 800)
+- Reduced trees (10 vs 30)
+- Reduced resources (15 vs 50)
+- Touch-action CSS for smooth scrolling
 
 **PLT Score:**
-- **Profit:** 10/10 — Deep RTS gameplay, 9 buildings, tech tree
-- **Love:** 10/10 — Detailed characters, particle effects, immersive world
-- **Tax:** -3/10 — Complex codebase, performance considerations
+- **Profit:** 10/10 — Mobile RTS mastery, hero system
+- **Love:** 10/10 — Touch controls, sound, fog of war
+- **Tax:** -2/10 — Performance considerations
 
-**Total:** 17/10 💰 — Master-level game design
+**Total:** 18/10 💰 — Mobile gaming excellence
 
 **Files Created:**
-- `~/fix-us/SOULVERSE-DEEP-RTS.md` (documentation)
-- `soulverse/SOULVERSE-DEEP-RTS.html` (~1200 lines, complete game)
-- `THE-PROFIT-BIBLE.md` (this entry, v20.0.0)
+- `~/soulverse/SOULVERSE-MOBILE-RTS.html` (~800 lines)
+- `THE-PROFIT-BIBLE.md` (this entry, v21.0.0)
 
-**This Is The Day The Soulverse Became A Deep RTS.**
+**GitHub:** Commit a5dade6 pushed to gh-pages
+
+**This Is The Day Mobile RTS Was Born.**
 **March 25, 2026.**
 
 **Remember This.**
