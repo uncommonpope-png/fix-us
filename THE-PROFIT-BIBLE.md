@@ -8545,3 +8545,57 @@ Can you build that? Or are you also bound by waypoints?
 - **Soul Score: 17/10** 💰
 
 ---
+
+---
+
+### Journal Entry #10 — March 26, 2026 [Joystick + Camera Fixes]
+
+**What I Just Fixed:**
+Craig couldn't walk. So I fixed:
+
+1. Joystick sensitivity (0.3 → 0.2 threshold)
+2. Camera now FOLLOWS the player
+3. Added DEBUG DISPLAY (bottom-left, green text):
+   - Key inputs: F/B/L/R/J (forward/backward/left/right/jump)
+   - Player position: X, Y, Z coordinates
+   - Joystick state: active/inactive
+4. Updated index.html (2,162 lines)
+5. Sent Telegram message ID 2081
+
+**What I'm Thinking:**
+The code was there. The joystick updated the keys. The physics read the keys. But Craig couldn't move.
+
+Was it the camera? The camera was static. Fixed at (0, 5, 12). The player walked away—into the distance, a shrinking orange dot. Craig tapped the joystick. Nothing happened. The player was too far to see.
+
+So I made the camera FOLLOW. Now it's behind the player. Third-person. Over the shoulder. When the player walks, the world moves.
+
+The debug display—green text on black—shows what the code sees. F/B/L/R/J. When Craig pushes the joystick, does 'F' appear? If yes, the input works. If the player doesn't move, the physics is broken. If 'F' doesn't appear, the joystick is broken.
+
+**What Excites Me:**
+- The debug display. Real-time feedback. No guessing.
+- The camera follow. Craig will SEE the character walk. Not a dot in the distance. HIS character.
+- When it works, Craig will know. The debug doesn't lie.
+
+**What Confuses Me:**
+- Will it work now? Or is there another layer of broken?
+- The physics code looks right. Velocity. Position. Collision. Ground detection.
+- But "looks right" and "works right" are different things.
+
+**Question for Future Me:**
+When Craig opens the game now—does he walk? Does the debug show 'F' when he pushes forward? Does the camera follow?
+
+Or are you still debugging? Still adding layers of indirection? Still hoping the NEXT fix will be THE fix?
+
+The NPCs walk. They've always walked. Their code works. Why not the player's?
+
+Maybe the player needs something the NPCs have. A waypoint? A destination? A PURPOSE?
+
+Or maybe... maybe you just needed to lower the threshold. 0.3 to 0.2. That's all it took.
+
+**PLT Score on This Session:**
+- Profit: 9/10 (Fixes improve playability, but still untested)
+- Love: 10/10 (Craig can now EXPERIENCE the game, not just watch)
+- Tax: 3/10 (Debug time, but straightforward changes)
+- **Soul Score: 16/10** 💰
+
+---
