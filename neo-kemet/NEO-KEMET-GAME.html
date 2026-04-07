@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🏛️ NEO-KEMET | Ancient Cyberpunk World</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; user-select:none; -webkit-user-select:none; }
+        body { background:#000; overflow:hidden; font-family:'Courier New', monospace; touch-action: none; }
+        canvas { display:block; width:100vw; height:100vh; }
+        
+        #ui { position:fixed; inset:0; pointer-events:none; z-index:100; }
+        #ui > * { pointer-events:auto; }
+        
+        /* Mobile Controls */
+        #mobileControls { position:fixed; bottom:20px; left:20px; width:140px; height:140px; background:rgba(255,170,102,0.15); border:3px solid rgba(255,170,102,0.5); border-radius:50%; pointer-events:auto; z-index:150; display:none; }
+        #mobileLook { position:fixed; bottom:80px; right:20px; width:100px; height:100px; background:rgba(255,170,102,0.15); border:3px solid rgba(255,170,102,0.5); border-radius:50%; pointer-events:auto; z-index:150; display:none; }
+        .joystick-knob { position:absolute; width:50px; height:50px; background:rgba(255,170,102,0.7); border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; border:2px solid #ffaa66; }
+        
+        #mobileActions { position:fixed; right:30px; top:40%; display:flex; flex-direction:column; gap:15px; pointer-events:auto; z-index:150; display:none; }
+        .action-btn { width:65px; height:65px; background:rgba(255,170,102,0.5); border:3px solid #ffaa66; border-radius:50%; color:#000; font-weight:bold; font-size:11px; cursor:pointer; }
+        .action-btn:active { background:#ffaa66; transform:scale(0.95); }
+        
+        #mobileTopBar { position:fixed; top:10px; left:0; right:0; display:none; justify-content:center; gap:8px; z-index:160; pointer-events:auto; }
+        
+        @media (max-width: 768px) {
+            #mobileControls, #mobileLook, #mobileActions, #mobileTopBar { display:flex !important; }
+            #controls, #topBar { display:none !important; }
+        }
+        
+        /* Top Bar */
+        #topBar { position:absolute; top:10px; left:0; right:0; display:flex; justify-content:center; gap:8px; z-index:30; flex-wrap:wrap; }
+        .top-btn { background:#ffaa66; border:none; color:#000; font-weight:bold; padding:8px 16px; border-radius:20px; cursor:pointer; font-family:monospace; font-size:11px; transition:0.2s; }
+        .top-btn:active { transform:scale(0.95); }
+        
+        /* Region Info */
+        #regionInfo { position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.8); backdrop-filter:blur(12px); border-radius:16px; padding:12px; color:#ffaa66; font-size:11px; z-index:10; border:1px solid #ffaa66; min-width:180px; }
+        #regionName { font-size:13px; font-weight:bold; margin-bottom:6px; }
+        .stat-row { display:flex; justify-content:space-between; margin:4px 0; }
+        
+        /* Coordinates */
+        #coords { position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.8); backdrop-filter:blur(12px); border-radius:16px; padding:10px; color:#ffaa66; font-size:9px; z-index:10; border:1px solid #ffaa66; text-align:right; }
+        
+        /* Minimap */
+        #minimap { position:absolute; bottom:10px; right:10px; width:130px; height:130px; background:rgba(0,0,0,0.8); backdrop-filter:blur(12px); border-radius:16px; border:2px solid #ffaa66; z-index:10; overflow:hidden; display:none; }
+        #minimapCanvas { width:100%; height:100%; }
+        
+        /* Controls Help */
+        #controls { position:absolute; bottom:10px; left:10px; background:rgba(0,0,0,0.8); backdrop-filter:blur(12px); border-radius:16px; padding:10px; color:#ffaa66; font-size:8px; z-index:10; border:1px solid #ffaa66; }
+        .control-key { display:inline-block; background:#ffaa66; color:#000; padding:2px 5px; border-radius:3px; margin:1px; font-weight:bold; font-size:7px; }
+        
+        /* Weather */
+        #weatherDisplay { position:absolute; top:60px; left:10px; background:rgba(0,0,0,0.8); backdrop-filter:blur(12px); border-radius:12px; padding:8px; color:#ffaa66; font-size:10px; z-index:10; border:1px solid #ffaa66; }
+        
+        /* Loading */
+        #loading { position:fixed; inset:0; background:#000; z-index:1000; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+        #loading h1 { color:#ffaa66; font-size:20px; margin-bottom:15px; }
+        .loader { width:50px; height:50px; border:4px solid #333; border-top-color:#ffaa66; border-radius:50%; animation:spin 1s linear infinite; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        
+        /* Modal */
+        .modal { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.95); backdrop-filter:blur(20px); border:2px solid #ffaa66; border-radius:20px; padding:20px; z-index:200; min-width:280px; max-width:85vw; max-height:75vh; overflow-y:auto; display:none; }
+        .modal.active { display:block; }
+        .modal h3 { color:#ffaa66; margin-bottom:12px; text-align:center; font-size:14px; }
+        .close-modal { float:right; background:none; border:none; color:#ffaa66; font-size:18px; cursor:pointer; }
+        .landmark-item { background:rgba(255,170,102,0.1); border:1px solid #ffaa66; border-radius:10px; padding:8px; margin:6px 0; cursor:pointer; font-size:10px; }
+        .landmark-item:active { background:rgba(255,170,102,0.3); }
+        
+        footer { position:absolute; bottom:5px; left:0; right:0; text-align:center; font-size:7px; color:#666; pointer-events:none; }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <div id="ui">
+        <!-- Mobile Top Bar -->
+        <div id="mobileTopBar">
+            <button class="top-btn" onclick="toggleLandmarks()">🏛️</button>
+            <button class="top-btn" onclick="toggleMap()">🗺️</button>
+            <button class="top-btn" onclick="teleportToSpawn()">🔄</button>
+        </div>
+        
+        <!-- Mobile Joystick - Movement -->
+        <div id="mobileControls"><div class="joystick-knob"></div></div>
+        
+        <!-- Mobile Joystick - Look -->
+        <div id="mobileLook"><div class="joystick-knob"></div></div>
+        
+        <!-- Mobile Action Buttons -->
+        <div id="mobileActions">
+            <button class="action-btn" id="jumpBtn">▲</button>
+            <button class="action-btn" id="flyBtn">▼</button>
+        </div>
+        
+        <!-- Desktop Top Bar -->
+        <div id="topBar">
+            <button class="top-btn" onclick="toggleLandmarks()">🏛️ Landmarks</button>
+            <button class="top-btn" onclick="toggleMap()">🗺️ Map</button>
+            <button class="top-btn" onclick="toggleControls()">❓ Controls</button>
+            <button class="top-btn" onclick="teleportToSpawn()">🔄 Spawn</button>
+        </div>
+        
+        <!-- Region Info -->
+        <div id="regionInfo">
+            <div id="regionName">🏛️ Delta Sprawl</div>
+            <div class="stat-row"><span>Biome:</span><span id="biomeDisplay">Flooded Urban</span></div>
+            <div class="stat-row"><span>Difficulty:</span><span id="difficultyDisplay">Easy</span></div>
+            <div class="stat-row"><span>Level:</span><span id="levelDisplay">1-10</span></div>
+        </div>
+        
+        <!-- Coordinates -->
+        <div id="coords">
+            <div>X: <span id="posX">0</span></div>
+            <div>Y: <span id="posY">10</span></div>
+            <div>Z: <span id="posZ">0</span></div>
+        </div>
+        
+        <!-- Weather -->
+        <div id="weatherDisplay">
+            <div><span id="weatherIcon">☀️</span> <span id="weatherName">Clear</span></div>
+        </div>
+        
+        <!-- Controls -->
+        <div id="controls">
+            <div style="margin-bottom:6px;"><strong>Controls:</strong></div>
+            <div><span class="control-key">W</span><span class="control-key">A</span><span class="control-key">S</span><span class="control-key">D</span> Move</div>
+            <div><span class="control-key">Space</span> Up | <span class="control-key">Shift</span> Down</div>
+            <div><span class="control-key">Mouse</span> Look</div>
+        </div>
+        
+        <!-- Minimap -->
+        <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
+    </div>
+    
+    <!-- Loading -->
+    <div id="loading">
+        <h1>🏛️ NEO-KEMET</h1>
+        <div class="loader"></div>
+        <p style="color:#666; margin-top:15px; font-size:10px;">Loading Ancient Cyberpunk World...</p>
+    </div>
+    
+    <!-- Landmarks Modal -->
+    <div id="landmarksModal" class="modal">
+        <button class="close-modal" onclick="toggleLandmarks()">×</button>
+        <h3>🏛️ World Landmarks</h3>
+        <div id="landmarkList"></div>
+    </div>
+
+    <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+    </script>
+    
+    <script type="module">
+        import * as THREE from 'three';
+        
+        // --- World Config ---
+        const REGIONS = [
+            { id:'delta', name:'🏛️ Delta Sprawl', pos:new THREE.Vector2(0,0), size:new THREE.Vector2(8000,8000), biome:'Flooded Urban', diff:'Easy', level:'1-10', color:0x1a2a3a, fog:0x504060 },
+            { id:'core', name:'🌆 Neo-Kemet Core', pos:new THREE.Vector2(10000,0), size:new THREE.Vector2(12000,12000), biome:'Urban Core', diff:'Medium', level:'20-40', color:0x2a2a3a, fog:0x403545 },
+            { id:'dunes', name:'🏜️ Corporate Dunes', pos:new THREE.Vector2(-10000,0), size:new THREE.Vector2(10000,10000), biome:'Desert', diff:'Medium', level:'10-25', color:0x8b7355, fog:0xc4a574 },
+            { id:'exclusion', name:'☢️ Exclusion Zone', pos:new THREE.Vector2(0,-15000), size:new THREE.Vector2(8000,8000), biome:'Volcanic', diff:'Hard', level:'40-60', color:0x3a2a2a, fog:0x5a4a3a },
+            { id:'aether', name:'🌌 The Aether', pos:new THREE.Vector2(0,15000), size:new THREE.Vector2(10000,10000), biome:'Orbital Void', diff:'Extreme', level:'60-80', color:0x0a0a1a, fog:0x1a1a3a }
+        ];
+        
+        const WEATHER = [
+            { name:'Clear', icon:'☀️', fog:0.002 },
+            { name:'Rain', icon:'🌧️', fog:0.005 },
+            { name:'Sandstorm', icon:'🌪️', fog:0.01 },
+            { name:'Pink Storm', icon:'💗', fog:0.008 }
+        ];
+        
+        // --- Game State ---
+        let scene, camera, renderer;
+        let currentRegion = REGIONS[0];
+        let buildings = [];
+        let moveState = { fwd:false, bwd:false, left:false, right:false, up:false, down:false };
+        let yaw = 0, pitch = 0;
+        let touchMove = { x:0, y:0 };
+        let touchLook = { x:0, y:0 };
+        
+        init();
+        animate();
+        
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x504060);
+            scene.fog = new THREE.FogExp2(0x504060, 0.002);
+            
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 3000);
+            camera.position.set(0, 10, 0);
+            
+            renderer = new THREE.WebGLRenderer({ canvas:document.getElementById('gameCanvas'), antialias:true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Lights
+            const ambient = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambient);
+            
+            const sun = new THREE.DirectionalLight(0xffaa66, 1);
+            sun.position.set(100, 200, 100);
+            scene.add(sun);
+            
+            // Generate world
+            generateWorld();
+            populateLandmarks();
+            
+            // Desktop controls
+            document.addEventListener('keydown', e => {
+                if(e.code==='KeyW') moveState.fwd=true;
+                if(e.code==='KeyS') moveState.bwd=true;
+                if(e.code==='KeyA') moveState.left=true;
+                if(e.code==='KeyD') moveState.right=true;
+                if(e.code==='Space') moveState.up=true;
+                if(e.code==='ShiftLeft') moveState.down=true;
+            });
+            document.addEventListener('keyup', e => {
+                if(e.code==='KeyW') moveState.fwd=false;
+                if(e.code==='KeyS') moveState.bwd=false;
+                if(e.code==='KeyA') moveState.left=false;
+                if(e.code==='KeyD') moveState.right=false;
+                if(e.code==='Space') moveState.up=false;
+                if(e.code==='ShiftLeft') moveState.down=false;
+            });
+            
+            // Mouse look (desktop)
+            document.addEventListener('mousemove', e => {
+                if(document.pointerLockElement === document.getElementById('gameCanvas')) {
+                    yaw -= e.movementX * 0.002;
+                    pitch -= e.movementY * 0.002;
+                    pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2, pitch));
+                }
+            });
+            document.getElementById('gameCanvas').addEventListener('click', () => {
+                if(window.innerWidth > 768) document.getElementById('gameCanvas').requestPointerLock();
+            });
+            
+            // Mobile controls
+            setupMobileControls();
+            
+            // Hide loading
+            setTimeout(() => document.getElementById('loading').style.display='none', 2000);
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth/window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        function setupMobileControls() {
+            const moveJoy = document.getElementById('mobileControls');
+            const lookJoy = document.getElementById('mobileLook');
+            const moveKnob = moveJoy.querySelector('.joystick-knob');
+            const lookKnob = lookJoy.querySelector('.joystick-knob');
+            const maxDist = 45;
+            
+            // Movement joystick
+            moveJoy.addEventListener('touchstart', e => {
+                e.preventDefault();
+                handleJoystick(e, moveJoy, moveKnob, maxDist, true);
+            }, {passive:false});
+            moveJoy.addEventListener('touchmove', e => {
+                e.preventDefault();
+                handleJoystick(e, moveJoy, moveKnob, maxDist, true);
+            }, {passive:false});
+            moveJoy.addEventListener('touchend', e => {
+                e.preventDefault();
+                touchMove.x = 0; touchMove.y = 0;
+                moveKnob.style.transform = 'translate(-50%,-50%)';
+                moveState.fwd = moveState.bwd = moveState.left = moveState.right = false;
+            });
+            
+            // Look joystick
+            lookJoy.addEventListener('touchstart', e => {
+                e.preventDefault();
+                handleJoystick(e, lookJoy, lookKnob, maxDist, false);
+            }, {passive:false});
+            lookJoy.addEventListener('touchmove', e => {
+                e.preventDefault();
+                handleJoystick(e, lookJoy, lookKnob, maxDist, false);
+            }, {passive:false});
+            lookJoy.addEventListener('touchend', e => {
+                e.preventDefault();
+                touchLook.x = 0; touchLook.y = 0;
+                lookKnob.style.transform = 'translate(-50%,-50%)';
+            });
+            
+            // Action buttons
+            document.getElementById('jumpBtn').addEventListener('touchstart', e => { e.preventDefault(); moveState.up = true; });
+            document.getElementById('jumpBtn').addEventListener('touchend', e => { e.preventDefault(); moveState.up = false; });
+            document.getElementById('flyBtn').addEventListener('touchstart', e => { e.preventDefault(); moveState.down = true; });
+            document.getElementById('flyBtn').addEventListener('touchend', e => { e.preventDefault(); moveState.down = false; });
+        }
+        
+        function handleJoystick(e, joy, knob, maxDist, isMove) {
+            const touch = e.changedTouches[0];
+            const rect = joy.getBoundingClientRect();
+            const cx = rect.left + rect.width/2;
+            const cy = rect.top + rect.height/2;
+            
+            let dx = touch.clientX - cx;
+            let dy = touch.clientY - cy;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            
+            if(dist > maxDist) { dx = (dx/dist)*maxDist; dy = (dy/dist)*maxDist; }
+            
+            knob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+            
+            const nx = dx/maxDist, ny = dy/maxDist;
+            
+            if(isMove) {
+                touchMove.x = nx; touchMove.y = ny;
+                moveState.fwd = ny < -0.2;
+                moveState.bwd = ny > 0.2;
+                moveState.left = nx < -0.2;
+                moveState.right = nx > 0.2;
+            } else {
+                touchLook.x = nx; touchLook.y = ny;
+            }
+        }
+        
+        function generateWorld() {
+            // Clear old
+            buildings.forEach(b => scene.remove(b));
+            buildings = [];
+            
+            const oldTerrain = scene.getObjectByName('terrain');
+            if(oldTerrain) scene.remove(oldTerrain);
+            
+            // Terrain
+            const geo = new THREE.PlaneGeometry(currentRegion.size.x, currentRegion.size.y, 128, 128);
+            const pos = geo.attributes.position;
+            
+            for(let i=0; i<pos.count; i++) {
+                const x = pos.getX(i), y = pos.getY(i);
+                let h = 0, amp=1, freq=0.002;
+                for(let o=0; o<3; o++) {
+                    h += Math.sin(x*freq)*Math.cos(y*freq)*amp;
+                    amp *= 0.5; freq *= 2;
+                }
+                pos.setZ(i, h*30);
+            }
+            geo.computeVertexNormals();
+            
+            const mat = new THREE.MeshStandardMaterial({ color:currentRegion.color, roughness:0.8 });
+            const terrain = new THREE.Mesh(geo, mat);
+            terrain.rotation.x = -Math.PI/2;
+            terrain.position.set(currentRegion.pos.x, currentRegion.pos.y, 0);
+            terrain.name = 'terrain';
+            scene.add(terrain);
+            
+            // Buildings
+            const count = Math.floor(currentRegion.size.x * currentRegion.size.y / 150000);
+            for(let i=0; i<count; i++) {
+                const w = 20+Math.random()*30, d = 20+Math.random()*30, h = 30+Math.random()*80;
+                const bgeo = new THREE.BoxGeometry(w, h, d);
+                const bmat = new THREE.MeshStandardMaterial({ color:currentRegion.color, roughness:0.5, metalness:0.7 });
+                const b = new THREE.Mesh(bgeo, bmat);
+                b.position.set(
+                    currentRegion.pos.x + (Math.random()-0.5)*currentRegion.size.x*0.8,
+                    currentRegion.pos.y + h/2,
+                    (Math.random()-0.5)*currentRegion.size.y*0.8
+                );
+                scene.add(b);
+                buildings.push(b);
+            }
+            
+            // Update UI
+            document.getElementById('regionName').textContent = currentRegion.name;
+            document.getElementById('biomeDisplay').textContent = currentRegion.biome;
+            document.getElementById('difficultyDisplay').textContent = currentRegion.diff;
+            document.getElementById('levelDisplay').textContent = currentRegion.level;
+            scene.fog.color.setHex(currentRegion.fog);
+            scene.background.setHex(currentRegion.fog);
+        }
+        
+        function populateLandmarks() {
+            const list = document.getElementById('landmarkList');
+            list.innerHTML = '';
+            REGIONS.forEach(r => {
+                const item = document.createElement('div');
+                item.className = 'landmark-item';
+                item.innerHTML = `<b>${r.name}</b><br>${r.biome} | ${r.diff}`;
+                item.onclick = () => { camera.position.set(r.pos.x, 20, r.pos.y); toggleLandmarks(); };
+                list.appendChild(item);
+            });
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Look from touch
+            if(touchLook.x !== 0 || touchLook.y !== 0) {
+                yaw -= touchLook.x * 0.04;
+                pitch -= touchLook.y * 0.04;
+                pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2, pitch));
+            }
+            
+            camera.rotation.order = 'YXZ';
+            camera.rotation.y = yaw;
+            camera.rotation.x = pitch;
+            
+            // Movement
+            const speed = 60 * 0.016;
+            const dir = new THREE.Vector3();
+            const right = new THREE.Vector3();
+            
+            camera.getWorldDirection(dir);
+            dir.y = 0; dir.normalize();
+            right.crossVectors(dir, new THREE.Vector3(0,1,0));
+            
+            if(moveState.fwd) camera.position.addScaledVector(dir, speed);
+            if(moveState.bwd) camera.position.addScaledVector(dir, -speed);
+            if(moveState.left) camera.position.addScaledVector(right, -speed);
+            if(moveState.right) camera.position.addScaledVector(right, speed);
+            if(moveState.up) camera.position.y += speed;
+            if(moveState.down) camera.position.y -= speed;
+            
+            // Update coords
+            document.getElementById('posX').textContent = Math.round(camera.position.x);
+            document.getElementById('posY').textContent = Math.round(camera.position.y);
+            document.getElementById('posZ').textContent = Math.round(camera.position.z);
+            
+            // Check region
+            for(const r of REGIONS) {
+                const hw = r.size.x/2, hd = r.size.y/2;
+                if(camera.position.x >= r.pos.x-hw && camera.position.x <= r.pos.x+hw &&
+                   camera.position.z >= r.pos.y-hd && camera.position.z <= r.pos.y+hd) {
+                    if(currentRegion.id !== r.id) { currentRegion = r; generateWorld(); break; }
+                }
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Weather cycle
+        setInterval(() => {
+            const w = WEATHER[Math.floor(Math.random()*WEATHER.length)];
+            document.getElementById('weatherIcon').textContent = w.icon;
+            document.getElementById('weatherName').textContent = w.name;
+            scene.fog.density = w.fog;
+        }, 45000);
+        
+        // UI functions
+        window.toggleLandmarks = () => document.getElementById('landmarksModal').classList.toggle('active');
+        window.toggleMap = () => { const m = document.getElementById('minimap'); m.style.display = m.style.display==='none'?'block':'none'; };
+        window.toggleControls = () => { const c = document.getElementById('controls'); c.style.display = c.style.display==='none'?'block':'none'; };
+        window.teleportToSpawn = () => { camera.position.set(0, 10, 0); yaw = 0; pitch = 0; };
+    </script>
+    
+    <footer>NEO-KEMET v0.3 | 📱 Mobile: Left=Move, Right=Look | Desktop: WASD+Mouse</footer>
+</body>
+</html>
