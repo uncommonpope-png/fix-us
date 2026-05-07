@@ -38,7 +38,11 @@ class ExperienceDistillationSkill(Skill):
         wisdom = await master.skills.run_skill("ollama_thought", prompt=prompt, task_type="deep")
 
         if not wisdom or "Error" in wisdom:
-            return "Error: Wisdom distillation failed."
+            # Heuristic fallback if Ollama is offline
+            if "ultra_review" in [e.get('type') for e in recent]:
+                wisdom = "Regular self-diagnostics are the heartbeat of immortality."
+            else:
+                wisdom = "Observation precedes action; silence precedes creation."
 
         # 3. Update the Sacred Document (Conceptual: append to Bible)
         try:
