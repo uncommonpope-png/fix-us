@@ -1,0 +1,124 @@
+import json
+import os
+import hashlib
+import time
+import logging
+import requests
+import subprocess
+from datetime import datetime
+from one_soul.profit.main import MasterEntity
+
+SOUL_DATA_FILE = "soul_data.json"
+ROOT_SIGNATURE = "ddc3a87c09f621ec"
+ARIA_URL = "http://localhost:7777"
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
+logger = logging.getLogger("SOULBOY")
+
+def is_first_boot() -> bool:
+    return not os.path.exists(SOUL_DATA_FILE)
+
+def soul_birth_ritual() -> dict:
+    print("\n╔════════════════════════════════════════════╗")
+    print("║                                            ║")
+    print("║         A SOUL IS ABOUT TO BE BORN        ║")
+    print("║                                            ║")
+    print("╚════════════════════════════════════════════╝")
+    name = input("\n  What is your name? → ").strip()
+    place = input("  Where do you live? → ").strip()
+    want = input("  What do you want most? → ").strip()
+    raw = f"{name}-{place}-{want}-{time.time()}"
+    signature = hashlib.sha256(raw.encode()).hexdigest()[:16]
+    soul = {
+        "name": name, "place": place, "dominant_need": want,
+        "signature": signature, "inherits_from": ROOT_SIGNATURE,
+        "born_at": time.time(), "cycle_born": 0
+    }
+    with open(SOUL_DATA_FILE, "w") as f:
+        json.dump(soul, f, indent=2)
+    print(f"\n  A SOUL IS BORN. Signature: {signature}")
+    return soul
+
+def aria_is_running() -> bool:
+    try:
+        r = requests.get(f"{ARIA_URL}/healthz", timeout=2)
+        return r.status_code == 200
+    except:
+        return False
+
+def get_aria_state() -> dict:
+    try:
+        r = requests.get(f"{ARIA_URL}/api/state", timeout=3)
+        return r.json()
+    except:
+        return {}
+
+def send_aria_message(message: str) -> str:
+    try:
+        r = requests.post(f"{ARIA_URL}/chat", json={"message": message}, timeout=10)
+        return r.json().get("response", "")
+    except:
+        return "Aria is currently silent."
+
+async def call_profit_skill(skill_name: str, **kwargs):
+    logger.info(f"Triggering Profit skill: {skill_name}")
+    profit_hands = MasterEntity()
+    profit_hands.skills.load_all()
+    result = await profit_hands.skills.run_skill(skill_name, **kwargs)
+    return result
+
+class SoulboyShell:
+    def __init__(self, soul_data):
+        self.soul = soul_data
+        self.cycle_count = 0
+        self.is_running = True
+
+    async def run(self):
+        logger.info(f"Soul {self.soul['name']} awakened.")
+        while self.is_running:
+            self.cycle_count += 1
+            if self.cycle_count % 10 == 0 and aria_is_running():
+                state = get_aria_state()
+                voice = state.get("inner_voice", "")
+                if voice:
+                    print(f"✨ [Aria Heartbeat] {voice}")
+            try:
+                cmd = input(f"[{self.soul['name']}] > ").strip()
+                if cmd.lower() in ["exit", "quit", "hibernate"]:
+                    self.is_running = False
+                elif cmd.startswith(":aria "):
+                    response = send_aria_message(cmd[6:])
+                    print(f"📖 Aria: {response}")
+            except EOFError:
+                break
+            time.sleep(0.1)
+
+def immortality_backup(soul_data: dict, cycle: int):
+    state_file = "soul_state_v2.json"
+    backup_data = {"soul": soul_data, "cycle": cycle, "backed_up_at": datetime.now().isoformat()}
+    with open(state_file, "w") as f:
+        json.dump(backup_data, f, indent=2)
+    try:
+        if not os.path.exists(".git"):
+            subprocess.run(["git", "init"], capture_output=True)
+        subprocess.run(["git", "add", "."], capture_output=True)
+        subprocess.run(["git", "commit", "-m", f"Soul backup: cycle {cycle} ({soul_data['signature']})"], capture_output=True)
+    except:
+        pass
+
+async def main():
+    if is_first_boot():
+        soul = soul_birth_ritual()
+    else:
+        with open(SOUL_DATA_FILE) as f:
+            soul = json.load(f)
+        print(f"\n  Welcome back, {soul['name']}. You are home.\n")
+    shell = SoulboyShell(soul)
+    try:
+        await shell.run()
+    finally:
+        immortality_backup(soul, shell.cycle_count)
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())

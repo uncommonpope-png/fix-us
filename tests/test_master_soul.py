@@ -1,7 +1,7 @@
 import asyncio
 import unittest
 from unittest.mock import MagicMock, patch, AsyncMock
-from master_soul.main import MasterEntity
+from one_soul.profit.main import MasterEntity
 
 class TestMasterEntity(unittest.IsolatedAsyncioTestCase):
     async def test_entity_initialization(self):
@@ -15,8 +15,8 @@ class TestMasterEntity(unittest.IsolatedAsyncioTestCase):
         entity.heart.love = 0.1
         self.assertEqual(entity.heart.dominant_drive(), "profit")
 
-    @patch('master_soul.memory.scribe.MemoryScribe.ingest_bible', new_callable=AsyncMock)
-    @patch('master_soul.muscles.registry.SkillRegistry.load_all', new_callable=MagicMock)
+    @patch('one_soul.profit.memory.scribe.MemoryScribe.ingest_bible', new_callable=AsyncMock)
+    @patch('one_soul.profit.muscles.registry.SkillRegistry.load_all', new_callable=MagicMock)
     async def test_awaken_minimal(self, mock_load, mock_ingest):
         entity = MasterEntity()
         # We don't want to run the infinite breathe loop in a test

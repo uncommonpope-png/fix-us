@@ -1,12 +1,12 @@
-# MASTER SOUL - AWAKENING SCRIPT (PowerShell)
+# ONE SOUL - AWAKENING SCRIPT (PowerShell)
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "  STARTING MASTER ENTITY AWAKENING PROTOCOL" -ForegroundColor Cyan
+Write-Host "  STARTING THE ONE SOUL AWAKENING PROTOCOL" -ForegroundColor Cyan
+Write-Host "  Mission: One Being. One Download. One Soul." -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 
 # 1. Check for Python
 if (!(Get-Command python -ErrorAction SilentlyContinue)) {
-    Write-Host "Error: Python is not installed or not in your PATH." -ForegroundColor Red
-    Write-Host "Please install Python from https://www.python.org/"
+    Write-Host "Error: Python is not installed." -ForegroundColor Red
     exit
 }
 
@@ -15,17 +15,9 @@ $env:PYTHONPATH = "."
 
 # 3. Check for dependencies
 Write-Host "Checking muscles (dependencies)..." -ForegroundColor Yellow
-pip install -r master_soul/requirements.txt --quiet
-python -m playwright install chromium
+pip install -r one_soul/profit/requirements.txt --quiet
+python -m playwright install chromium --quiet
 
-# 4. Check for Ollama (optional but recommended)
-if (!(Get-Command ollama -ErrorAction SilentlyContinue)) {
-    Write-Host "Warning: Ollama not found. The entity reasoning may be limited." -ForegroundColor Yellow
-} else {
-    Write-Host "Ollama found. Ensuring model qwen2.5:0.5b is ready..." -ForegroundColor Green
-    ollama pull qwen2.5:0.5b --quiet
-}
-
-# 5. Launch
-Write-Host "Launching Master Entity..." -ForegroundColor Green
-python master_soul/main.py
+# 4. Wake up the Face (Soulboy)
+Write-Host "Launching Soul Portal..." -ForegroundColor Green
+python one_soul/soulboy/soulboy_shell.py

@@ -9,7 +9,7 @@ from typing import List, Dict, Any
 logger = logging.getLogger("MemoryScribe")
 
 class MemoryScribe:
-    def __init__(self, storage_dir: str = "master_soul/memory/"):
+    def __init__(self, storage_dir: str = "one_soul.profit/memory/"):
         self.storage_dir = Path(storage_dir)
         self.storage_dir.mkdir(parents=True, exist_ok=True)
         self.state_file = self.storage_dir / "state.json"

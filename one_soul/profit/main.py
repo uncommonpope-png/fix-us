@@ -1,11 +1,11 @@
 import asyncio
 import logging
 from typing import List, Dict, Any
-from master_soul.kernel.brain import SoulKernel
-from master_soul.memory.scribe import MemoryScribe
-from master_soul.memory.witness import ScribeWitness
-from master_soul.heart.plt_drive import PLTDrive
-from master_soul.muscles.registry import SkillRegistry
+from one_soul.profit.kernel.brain import SoulKernel
+from one_soul.profit.memory.scribe import MemoryScribe
+from one_soul.profit.memory.witness import ScribeWitness
+from one_soul.profit.heart.plt_drive import PLTDrive
+from one_soul.profit.muscles.registry import SkillRegistry
 
 # Configure logging to be expressive but clean
 logging.basicConfig(

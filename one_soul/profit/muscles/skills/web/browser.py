@@ -1,7 +1,7 @@
 import logging
 import asyncio
 from playwright.async_api import async_playwright
-from master_soul.muscles.registry import Skill
+from one_soul.profit.muscles.registry import Skill
 
 logger = logging.getLogger("BrowserSkill")
 

@@ -9,7 +9,7 @@ logger = logging.getLogger("ScribeWitness")
 class ScribeWitness:
     """The witnessing intelligence that records every movement of the soul."""
 
-    def __init__(self, log_dir: str = "master_soul/memory/witness/"):
+    def __init__(self, log_dir: str = "one_soul.profit/memory/witness/"):
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)
         self.current_session_file = self.log_dir / f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"

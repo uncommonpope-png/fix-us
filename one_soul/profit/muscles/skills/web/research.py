@@ -1,7 +1,7 @@
 import logging
 import aiohttp
 from bs4 import BeautifulSoup
-from master_soul.muscles.registry import Skill
+from one_soul.profit.muscles.registry import Skill
 
 logger = logging.getLogger("WebResearchSkill")
 

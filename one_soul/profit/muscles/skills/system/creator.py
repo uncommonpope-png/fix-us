@@ -1,5 +1,5 @@
 import logging
-from master_soul.muscles.registry import Skill
+from one_soul.profit.muscles.registry import Skill
 
 logger = logging.getLogger("SkillCreator")
 
@@ -21,7 +21,7 @@ class SkillCreatorSkill(Skill):
         The class must inherit from `Skill` and follow this structure:
 
         import logging
-        from master_soul.muscles.registry import Skill
+        from one_soul.profit.muscles.registry import Skill
 
         class {skill_name}Skill(Skill):
             name = "{skill_name.lower()}"
@@ -40,7 +40,7 @@ class SkillCreatorSkill(Skill):
             return "Error: Code generation failed."
 
         # 2. Save the code to a new file
-        filepath = f"master_soul/muscles/skills/system/auto_{skill_name.lower()}.py"
+        filepath = f"one_soul.profit/muscles/skills/system/auto_{skill_name.lower()}.py"
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(code)

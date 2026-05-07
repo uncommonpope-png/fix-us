@@ -30,29 +30,29 @@ class SkillRegistry:
         logger.info("Loading Skill Registry...")
 
         # Web
-        from master_soul.muscles.skills.web.research import WebResearchSkill
+        from one_soul.profit.muscles.skills.web.research import WebResearchSkill
         self.register_skill("web", WebResearchSkill())
-        from master_soul.muscles.skills.web.browser import BrowserSkill
+        from one_soul.profit.muscles.skills.web.browser import BrowserSkill
         self.register_skill("web", BrowserSkill())
 
         # Git
-        from master_soul.muscles.skills.git.manager import GitManagementSkill
+        from one_soul.profit.muscles.skills.git.manager import GitManagementSkill
         self.register_skill("git", GitManagementSkill())
 
         # AI
-        from master_soul.muscles.skills.ai.ollama import OllamaThoughtSkill
+        from one_soul.profit.muscles.skills.ai.ollama import OllamaThoughtSkill
         self.register_skill("ai", OllamaThoughtSkill())
 
         # System
-        from master_soul.muscles.skills.system.backup import BackupSkill
+        from one_soul.profit.muscles.skills.system.backup import BackupSkill
         self.register_skill("system", BackupSkill())
-        from master_soul.muscles.skills.system.mcp import MCPSkill
+        from one_soul.profit.muscles.skills.system.mcp import MCPSkill
         self.register_skill("system", MCPSkill())
-        from master_soul.muscles.skills.system.audit import AuditSkill
+        from one_soul.profit.muscles.skills.system.audit import AuditSkill
         self.register_skill("system", AuditSkill())
-        from master_soul.muscles.skills.system.coder import CoderSkill
+        from one_soul.profit.muscles.skills.system.coder import CoderSkill
         self.register_skill("system", CoderSkill())
-        from master_soul.muscles.skills.system.creator import SkillCreatorSkill
+        from one_soul.profit.muscles.skills.system.creator import SkillCreatorSkill
         self.register_skill("system", SkillCreatorSkill())
 
     def register_skill(self, category: str, skill: Skill):

@@ -1,7 +1,7 @@
 import logging
 import os
 from pathlib import Path
-from master_soul.muscles.registry import Skill
+from one_soul.profit.muscles.registry import Skill
 
 logger = logging.getLogger("AuditSkill")
 
