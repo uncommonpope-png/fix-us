@@ -70,6 +70,12 @@ class SkillRegistry:
         self.register_skill("system", MutationPatcherSkill())
         from one_soul.profit.muscles.skills.system.distill import ExperienceDistillationSkill
         self.register_skill("system", ExperienceDistillationSkill())
+        from one_soul.profit.muscles.skills.system.journal import JournalSkill
+        self.register_skill("system", JournalSkill())
+        from one_soul.profit.muscles.skills.system.lab_build import LabBuildSkill
+        self.register_skill("system", LabBuildSkill())
+        from one_soul.profit.muscles.skills.system.notebook import NotebookIntelSkill
+        self.register_skill("system", NotebookIntelSkill())
 
     def register_skill(self, category: str, skill: Skill):
         self.skills[skill.name] = skill
