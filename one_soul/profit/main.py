@@ -30,6 +30,7 @@ class MasterEntity:
         self.is_running = False
 
     async def awaken(self):
+        self.loop = asyncio.get_running_loop()
         # Start the Observatory dashboard
         self.observatory.start()
 

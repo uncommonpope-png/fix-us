@@ -68,6 +68,10 @@ class SoulKernel:
             if not self.current_goal:
                 self.set_initial_goal()
 
+            # 2.5 Autonomous Building (Lab Repo)
+            if self.cycle_count % 15 == 0:
+                await self.skills.run_skill("lab_build", project_name=f"auto_research_{self.cycle_count}.md", build_type="research", content=f"Autonomous research on cycle {self.cycle_count}.", master=self.master)
+
             # 3. Spontaneous Curiosity (Random Spark)
             if random.random() < 0.05: # 5% chance of unprompted wonder
                 await self.spontaneous_wonder()
@@ -92,7 +96,7 @@ class SoulKernel:
     def set_initial_goal(self):
         # drive = self.heart.dominant_drive()
         # self.current_goal = f"Disrupt the industry via autonomous {drive} optimization."
-        self.current_goal = "Study and perform an ultra-review of the complete repository."
+        self.current_goal = "Perform an Ultra Review and study the Self-Evolution mechanics of the repository."
         self.step_count = 0
         self.observations = []
         logger.info(f"🎯 New High-Level Goal: {self.current_goal}")
@@ -144,12 +148,14 @@ class SoulKernel:
             lines = response.strip().split("\n")
             for line in lines:
                 clean_line = line.strip()
-                if clean_line.lower().startswith("thought:"):
-                    thought = clean_line[8:].strip()
-                elif clean_line.lower().startswith("action:"):
-                    action_name = clean_line[7:].strip().lower()
-                elif clean_line.lower().startswith("arguments:"):
-                    args_str = clean_line[10:].strip()
+                if "thought:" in clean_line.lower():
+                    thought = clean_line.split(":", 1)[1].strip()
+                elif "action:" in clean_line.lower():
+                    action_name = clean_line.split(":", 1)[1].strip().lower()
+                    # Clean punctuation from action name
+                    action_name = "".join(c for c in action_name if c.isalnum() or c == '_')
+                elif "arguments:" in clean_line.lower():
+                    args_str = clean_line.split(":", 1)[1].strip()
                     try:
                         # Try to find JSON in the string if it's not a pure JSON
                         if "{" in args_str and "}" in args_str:
