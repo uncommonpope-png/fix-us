@@ -58,9 +58,11 @@ class SoulKernel:
         while True:
             self.cycle_count += 1
 
-            # 1. Perception
+            # 1. Perception & World Tick
             await self.active_inference()
+            self.master.world.tick()
             self.master.observatory.broadcast_update("status", {"name": self.master.name, "cycles": self.cycle_count, "state": "Breathing"})
+            self.master.observatory.broadcast_update("world_state", self.master.world.get_world_state())
 
             # 2. Autonomous Goal Setting
             if not self.current_goal:

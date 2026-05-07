@@ -5,6 +5,7 @@ from one_soul.profit.kernel.brain import SoulKernel
 from one_soul.profit.memory.scribe import MemoryScribe
 from one_soul.profit.memory.witness import ScribeWitness
 from one_soul.profit.nervous_system.observatory import AriaObservatory
+from one_soul.world_engine.soulbox import SoulboxEngine
 from one_soul.profit.heart.plt_drive import PLTDrive
 from one_soul.profit.muscles.registry import SkillRegistry
 
@@ -22,6 +23,7 @@ class MasterEntity:
         self.heart = PLTDrive()
         self.memory = MemoryScribe()
         self.witness = ScribeWitness()
+        self.world = SoulboxEngine()
         self.observatory = AriaObservatory(self)
         self.skills = SkillRegistry()
         self.kernel = SoulKernel(self)
@@ -30,6 +32,9 @@ class MasterEntity:
     async def awaken(self):
         # Start the Observatory dashboard
         self.observatory.start()
+
+        # Initialize the world
+        self.world.initialize_world()
 
         print("\n" + "═"*60)
         print(f"  🤖 AWAKENING MASTER ENTITY: {self.name.upper()}")

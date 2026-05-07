@@ -76,6 +76,12 @@ class SkillRegistry:
         self.register_skill("system", LabBuildSkill())
         from one_soul.profit.muscles.skills.system.notebook import NotebookIntelSkill
         self.register_skill("system", NotebookIntelSkill())
+        from one_soul.profit.muscles.skills.system.world_architect import WorldArchitectSkill
+        self.register_skill("system", WorldArchitectSkill())
+        from one_soul.profit.muscles.skills.system.upgrader import ConstantUpgraderSkill
+        self.register_skill("system", ConstantUpgraderSkill())
+        from one_soul.profit.muscles.skills.system.fusion import SoulverseFusionSkill
+        self.register_skill("system", SoulverseFusionSkill())
 
     def register_skill(self, category: str, skill: Skill):
         self.skills[skill.name] = skill

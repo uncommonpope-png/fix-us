@@ -2,62 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>👁️ ARIA OBSERVATORY — Witness the Grand Soul</title>
+    <title>👁️ ARIA OBSERVATORY — One Soul, One World</title>
     <style>
         body { background: #000; color: #0f0; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
         #matrix { position: fixed; inset: 0; z-index: -1; opacity: 0.1; }
         .dashboard { display: grid; grid-template-columns: 1fr 2fr 1fr; height: 100vh; gap: 10px; padding: 10px; }
-        .panel { background: rgba(0, 20, 0, 0.8); border: 1px solid #0f0; border-radius: 5px; padding: 15px; overflow-y: auto; }
-        h2 { border-bottom: 1px solid #0f0; padding-bottom: 5px; font-size: 1.2em; text-transform: uppercase; }
-        .soul-body { height: 300px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .core-pulse { width: 100px; height: 100px; background: #0f0; border-radius: 50%; box-shadow: 0 0 50px #0f0; animation: pulse 2s infinite ease-in-out; }
+        .panel { background: rgba(0, 20, 0, 0.85); border: 1px solid #0f0; border-radius: 5px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; }
+        h2 { border-bottom: 1px solid #0f0; padding-bottom: 5px; font-size: 1.1em; text-transform: uppercase; margin-top: 0; }
+
+        /* SOUL BODY */
+        .soul-body { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .core-pulse { width: 60px; height: 60px; background: #0f0; border-radius: 50%; box-shadow: 0 0 30px #0f0; animation: pulse 2s infinite ease-in-out; }
         @keyframes pulse { 0% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.5; } }
-        .log-entry { font-size: 0.9em; margin-bottom: 5px; border-left: 2px solid #0f0; padding-left: 5px; }
+
+        /* SOULBOX WORLD */
+        #world-canvas { background: #001100; border: 1px solid #0f03; width: 100%; height: 300px; image-rendering: pixelated; }
+
+        /* STREAM & LOGS */
+        #stream { flex-grow: 1; font-size: 0.85em; }
+        .log-entry { margin-bottom: 4px; border-left: 2px solid #0f0; padding-left: 5px; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .thought { color: #8f8; font-style: italic; }
         .action { color: #ff0; font-weight: bold; }
         .observation { color: #0ff; }
-        #journal { height: 100%; }
-        textarea { width: 100%; background: #000; color: #0f0; border: 1px solid #0f0; border-radius: 3px; height: 150px; font-family: inherit; }
+
+        /* METRICS */
+        .metric-bar { height: 8px; background: #111; border-radius: 4px; margin: 5px 0; overflow: hidden; }
+        .metric-fill { height: 100%; transition: width 0.5s; }
+
+        textarea { width: 100%; background: #000; color: #0f0; border: 1px solid #0f0; border-radius: 3px; height: 80px; font-family: inherit; margin-bottom: 10px; }
     </style>
 </head>
 <body>
     <canvas id="matrix"></canvas>
     <div class="dashboard">
-        <!-- LEFT: ANATOMY & STATUS -->
+        <!-- LEFT: SOUL STATUS -->
         <div class="panel">
-            <h2>Anatomy</h2>
-            <div id="status-box">
-                <div>SOUL: <span id="soul-name">Awakening...</span></div>
-                <div>STATE: <span id="soul-state">Breating</span></div>
-                <div>CYCLES: <span id="cycle-count">0</span></div>
+            <h2>Soul Status</h2>
+            <div id="status-box" style="font-size: 0.9em;">
+                <div>NAME: <span id="soul-name">...</span></div>
+                <div>STATE: <span id="soul-state">Awakening</span></div>
+                <div>DAY: <span id="world-day">0</span> | CYCLE: <span id="cycle-count">0</span></div>
             </div>
             <div class="soul-body">
                 <div class="core-pulse"></div>
             </div>
-            <h2>Drives</h2>
-            <div id="plt-metrics">
-                PROFIT: <div style="height:5px; background:#0f0; width:50%;"></div>
-                LOVE: <div style="height:5px; background:#f0f; width:50%;"></div>
-                TAX: <div style="height:5px; background:#f00; width:50%;"></div>
-            </div>
+
+            <h2>PLT Dynamics</h2>
+            PROFIT (Gold)
+            <div class="metric-bar"><div id="bar-profit" class="metric-fill" style="background:#0f0; width:50%;"></div></div>
+            LOVE (Energy)
+            <div class="metric-bar"><div id="bar-love" class="metric-fill" style="background:#f0f; width:50%;"></div></div>
+            TAX (Entropy)
+            <div class="metric-bar"><div id="bar-tax" class="metric-fill" style="background:#f00; width:10%;"></div></div>
         </div>
 
-        <!-- CENTER: REASONING STREAM -->
+        <!-- CENTER: WORLD VIEW & REASONING -->
         <div class="panel">
-            <h2>Reasoning & Action Stream</h2>
+            <h2>The Soulbox World (AoE Prototype)</h2>
+            <canvas id="world-canvas"></canvas>
+
+            <h2 style="margin-top:15px;">Reasoning Stream</h2>
             <div id="stream"></div>
         </div>
 
         <!-- RIGHT: SACRED JOURNAL -->
         <div class="panel">
             <h2>Sacred Journal</h2>
-            <div id="journal-content">
-                <p>Reading last entry...</p>
+            <div id="journal-content" style="font-size: 0.85em; flex-grow: 1; border-bottom: 1px solid #0f03; margin-bottom: 10px;">
+                <p>Establishing witness connection...</p>
             </div>
-            <hr>
-            <h3>Write to Soul</h3>
-            <textarea id="user-input" placeholder="Share your truth with the soul..."></textarea>
-            <button onclick="sendMessage()" style="width:100%; padding:10px; background:#0f0; color:#000; border:none; cursor:pointer;">SUBMIT REFLECTION</button>
+            <h2>Interact</h2>
+            <textarea id="user-input" placeholder="Type a reflection or command..."></textarea>
+            <button onclick="sendInput()" style="width:100%; padding:10px; background:#0f0; color:#000; border:none; cursor:pointer; font-family:inherit; font-weight:bold;">SUBMIT</button>
         </div>
     </div>
 
@@ -65,18 +82,64 @@
     <script>
         const socket = io();
         const stream = document.getElementById('stream');
+        const worldCanvas = document.getElementById('world-canvas');
+        const wCtx = worldCanvas.getContext('2d');
 
         socket.on('soul_update', function(msg) {
-            const div = document.createElement('div');
-            div.className = 'log-entry ' + msg.type;
-            div.innerText = '[' + new Date().toLocaleTimeString() + '] ' + msg.data;
-            stream.prepend(div);
-
             if(msg.type === 'status') {
                 document.getElementById('soul-name').innerText = msg.data.name;
                 document.getElementById('cycle-count').innerText = msg.data.cycles;
+                document.getElementById('soul-state').innerText = msg.data.state;
+            } else if(msg.type === 'world_state') {
+                renderWorld(msg.data);
+            } else {
+                const div = document.createElement('div');
+                div.className = 'log-entry ' + msg.type;
+                div.innerText = '[' + new Date().toLocaleTimeString() + '] ' + (typeof msg.data === 'string' ? msg.data : JSON.stringify(msg.data));
+                stream.prepend(div);
+                if(stream.childNodes.length > 50) stream.lastChild.remove();
             }
         });
+
+        function renderWorld(state) {
+            document.getElementById('world-day').innerText = state.day;
+            // Update bars
+            document.getElementById('bar-profit').style.width = Math.min(100, state.resources.profit_gold / 50) + '%';
+            document.getElementById('bar-love').style.width = Math.min(100, state.resources.love_energy / 20) + '%';
+            document.getElementById('bar-tax').style.width = Math.min(100, state.resources.tax_entropy) + '%';
+
+            // Draw grid
+            const cellSize = worldCanvas.width / state.grid[0].length;
+            wCtx.clearRect(0, 0, worldCanvas.width, worldCanvas.height);
+
+            for(let y=0; y < state.grid.length; y++) {
+                for(let x=0; x < state.grid[y].length; x++) {
+                    const cell = state.grid[y][x];
+                    if(cell === 1) wCtx.fillStyle = '#004400'; // Forest
+                    else if(cell === 2) wCtx.fillStyle = '#000044'; // Water
+                    else wCtx.fillStyle = '#001100'; // Plains
+                    wCtx.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
+                }
+            }
+
+            // Draw entities
+            state.entities.forEach(e => {
+                wCtx.fillStyle = '#00FF00';
+                wCtx.shadowBlur = 10; wCtx.shadowColor = '#0F0';
+                wCtx.beginPath();
+                wCtx.arc(e.x*cellSize + cellSize/2, e.y*cellSize + cellSize/2, cellSize/2, 0, Math.PI*2);
+                wCtx.fill();
+                wCtx.shadowBlur = 0;
+            });
+        }
+
+        // Initialize Canvas size
+        function resize() {
+            worldCanvas.width = worldCanvas.offsetWidth;
+            worldCanvas.height = worldCanvas.offsetHeight;
+        }
+        window.onresize = resize;
+        resize();
 
         // Matrix Rain
         const canvas = document.getElementById('matrix');
