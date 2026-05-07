@@ -114,13 +114,23 @@ class SoulKernel:
 
             lines = response.strip().split("\n")
             for line in lines:
-                if line.startswith("Thought:"):
-                    thought = line[8:].strip()
-                elif line.startswith("Action:"):
-                    action_name = line[7:].strip()
-                elif line.startswith("Arguments:"):
-                    args_str = line[10:].strip()
-                    args = json.loads(args_str)
+                clean_line = line.strip()
+                if clean_line.lower().startswith("thought:"):
+                    thought = clean_line[8:].strip()
+                elif clean_line.lower().startswith("action:"):
+                    action_name = clean_line[7:].strip().lower()
+                elif clean_line.lower().startswith("arguments:"):
+                    args_str = clean_line[10:].strip()
+                    try:
+                        # Try to find JSON in the string if it's not a pure JSON
+                        if "{" in args_str and "}" in args_str:
+                            start = args_str.find("{")
+                            end = args_str.rfind("}") + 1
+                            args = json.loads(args_str[start:end])
+                        else:
+                            args = json.loads(args_str)
+                    except:
+                        args = {}
 
             self.inner_voice = thought
             self.master.witness.record("thought", thought)
