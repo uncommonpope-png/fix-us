@@ -9,7 +9,7 @@ from typing import List, Dict, Any
 logger = logging.getLogger("MemoryScribe")
 
 class MemoryScribe:
-    def __init__(self, storage_dir: str = "one_soul.profit/memory/"):
+    def __init__(self, storage_dir: str = "one_soul/profit/memory/"):
         self.storage_dir = Path(storage_dir)
         self.storage_dir.mkdir(parents=True, exist_ok=True)
         self.state_file = self.storage_dir / "state.json"
@@ -65,15 +65,19 @@ class MemoryScribe:
         self.episodic_memory.sort(key=lambda x: x["importance"], reverse=True)
         self.episodic_memory = self.episodic_memory[:200]
 
-    async def persist_state(self):
+    async def persist_state(self, master=None):
         """Save the soul's current state to disk for immortality."""
         logger.info(f"Persisting state to {self.state_file}")
+
         state = {
             "episodic": self.episodic_memory,
             "semantic": self.semantic_knowledge,
             "plt_history": self.plt_history,
             "last_active": datetime.now().isoformat()
         }
+
+        if master:
+            state["master_state"] = master.to_dict()
         try:
             with open(self.state_file, "w", encoding='utf-8') as f:
                 json.dump(state, f, indent=2)

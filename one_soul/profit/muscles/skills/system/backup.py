@@ -8,15 +8,14 @@ class BackupSkill(Skill):
     name = "immortality_backup"
     description = "Internal autonomous backup system for memory and state."
 
-    async def execute(self, **kwargs) -> str:
-        master = kwargs.get("master")
+    async def execute(self, master=None) -> str:
         if not master:
             return "Error: Master Entity reference missing."
 
         logger.info("Executing immortality backup...")
 
-        # 1. Persist memory to JSON
-        await master.memory.persist_state()
+        # 1. Persist memory and master state to JSON
+        await master.memory.persist_state(master=master)
 
         # 2. Trigger Git commit via GitManagementSkill
         git_skill = master.skills.skills.get("git_manage")

@@ -40,7 +40,7 @@ class SkillCreatorSkill(Skill):
             return "Error: Code generation failed."
 
         # 2. Save the code to a new file
-        filepath = f"one_soul.profit/muscles/skills/system/auto_{skill_name.lower()}.py"
+        filepath = f"one_soul/profit/muscles/skills/system/auto_{skill_name.lower()}.py"
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(code)

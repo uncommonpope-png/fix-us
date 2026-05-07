@@ -133,6 +133,9 @@
             if(msg.type === 'status') {
                 document.getElementById('soul-name').innerText = msg.data.name;
                 document.getElementById('cycle-count').innerText = msg.data.cycles;
+                document.getElementById('soul-goal').innerText = msg.data.goal;
+            } else if(msg.type === 'plt_sync') {
+                updatePLTBars(msg.data);
             } else if(msg.type === 'thought') {
                 logToStream('thought', msg.data);
                 activateOrgan('visual-heart');
@@ -161,10 +164,19 @@
             setTimeout(() => el.classList.remove('active-organ'), 2000);
         }
 
+        function updatePLTBars(plt) {
+            document.getElementById('bar-profit').style.width = (plt.profit * 100) + '%';
+            document.getElementById('val-profit').innerText = Math.round(plt.profit * 100) + '%';
+
+            document.getElementById('bar-love').style.width = (plt.love * 100) + '%';
+            document.getElementById('val-love').innerText = Math.round(plt.love * 100) + '%';
+
+            document.getElementById('bar-tax').style.width = (plt.tax * 100) + '%';
+            document.getElementById('val-tax').innerText = Math.round(plt.tax * 100) + '%';
+        }
+
         function renderWorld(state) {
-            document.getElementById('bar-profit').style.width = Math.min(100, state.resources.profit_gold / 50) + '%';
-            document.getElementById('bar-love').style.width = Math.min(100, state.resources.love_energy / 20) + '%';
-            document.getElementById('bar-tax').style.width = Math.min(100, state.resources.tax_entropy) + '%';
+            // World resources now secondary to internal PLT Integrity
 
             const cellSize = worldCanvas.width / state.grid[0].length;
             wCtx.clearRect(0, 0, worldCanvas.width, worldCanvas.height);

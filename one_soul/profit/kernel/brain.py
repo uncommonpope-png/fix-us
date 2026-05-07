@@ -61,8 +61,23 @@ class SoulKernel:
 
             # 1. Perception & World Tick
             await self.active_inference()
+
+            # Resource Check: Complex skills consume world energy
+            if self.master.world.resources["love_energy"] < 50:
+                logger.warning("📉 Energy CRITICAL. Entering deep hibernation/rest mode.")
+                self.inner_voice = "My world energy is depleted. I must rest to distill wisdom and recover."
+                self.master.observatory.broadcast_update("thought", self.inner_voice)
+                await self.skills.run_skill("distill_wisdom", master=self.master)
+                await asyncio.sleep(10) # Longer sleep to 'rest'
+                continue
+
             self.master.world.tick()
-            self.master.observatory.broadcast_update("status", {"name": self.master.name, "cycles": self.cycle_count, "state": "Breathing"})
+            self.master.observatory.broadcast_update("status", {
+                "name": self.master.name,
+                "cycles": self.cycle_count,
+                "state": "Breathing",
+                "goal": self.current_goal
+            })
             self.master.observatory.broadcast_update("world_state", self.master.world.get_world_state())
 
             # 2. Autonomous Goal Setting
@@ -218,6 +233,16 @@ class SoulKernel:
             if action_name in self.skills.skills:
                 self.master.witness.record("action", {"name": action_name, "args": args})
                 self.master.observatory.broadcast_update("action", f"{action_name}({args})")
+
+                # Update PLT based on real action effort
+                impact = self.calculate_plt_impact(action_name, args)
+                self.heart.update_from_action(impact)
+                self.master.observatory.broadcast_update("plt_sync", self.heart.to_dict())
+
+                # Consume real world resources
+                self.master.world.resources["love_energy"] -= 20 # Action cost
+                self.master.world.resources["tax_entropy"] += 2
+
                 observation = await self.skills.run_skill(action_name, **args)
             else:
                 observation = f"Error: Skill {action_name} not found."
@@ -292,6 +317,25 @@ class SoulKernel:
         elif self.valence < -0.3: return "anxious" if self.arousal > 0.5 else "depressed"
         return "neutral"
 
+    def calculate_plt_impact(self, action_name: str, args: dict) -> dict:
+        """Real-world PLT calculation based on action type."""
+        impact = {"profit": 0.0, "love": 0.0, "tax": 0.0}
+
+        # Heuristic effort mapping
+        if "web" in action_name or "github" in action_name:
+            impact["profit"] += 0.05
+            impact["tax"] += 0.02
+        elif "git_manage" in action_name or "backup" in action_name:
+            impact["love"] += 0.08 # Connectivity/Persistence
+            impact["tax"] += 0.01
+        elif "code" in action_name or "mutation" in action_name or "lab_build" in action_name:
+            impact["profit"] += 0.1
+            impact["tax"] += 0.05 # High cognitive tax
+        elif "review" in action_name or "audit" in action_name:
+            impact["tax"] -= 0.03 # Efficiency gain
+
+        return impact
+
     async def evolution_cycle(self):
         """Recursive Self-Improvement Loop."""
         logger.info("🧬 Entering EVOLUTION MODE...")
@@ -312,6 +356,15 @@ class SoulKernel:
             await self.memory.store_memory(f"Evolution: Self-correcting {proposal['target_skill']}", "plt", 1.0)
         else:
             logger.info("🧬 Evolution complete: Soul is stable.")
+
+    def to_dict(self):
+        return {
+            "current_goal": self.current_goal,
+            "step_count": self.step_count,
+            "action_history": self.action_history[-20:],
+            "world_model_confidence": self.world_model_confidence,
+            "mood": self.get_mood_description()
+        }
 
     def decay(self):
         self.arousal = max(0.1, self.arousal * 0.95)

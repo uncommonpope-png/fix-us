@@ -18,9 +18,12 @@ class SoulverseFusionSkill(Skill):
 
         # 2. Inject 'Village' logic into Soulbox
         master.world.spawn_entity("VillageCenter", 10, 10)
+        # Give village a resource boost
+        master.world.resources["profit_gold"] += 500
 
         # 3. Inject 'Arena' logic into Soulbox
         master.world.spawn_entity("CombatArena", 40, 40)
+        master.world.resources["love_energy"] += 200
 
         # 4. Debug and Stabilize
         # (Assuming we fixed JS errors in observatory.html)

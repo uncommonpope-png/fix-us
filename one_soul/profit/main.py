@@ -64,6 +64,7 @@ class MasterEntity:
             "name": self.name,
             "heart": self.heart.to_dict(),
             "world": self.world.to_dict(),
+            "kernel": self.kernel.to_dict(),
             "is_running": self.is_running
         }
 
