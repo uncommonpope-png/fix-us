@@ -132,19 +132,21 @@ class SoulKernel:
         # 1. Thought & Action selection via Ollama
         response = await self.skills.run_skill("ollama_thought", prompt=prompt, task_type=task_type)
 
+        # 2. Heuristic Fallback (If Ollama is silent or erroring)
         if not response or "Error" in response:
-            logger.warning("Reasoning failed or Ollama offline. Falling back to heuristic action.")
-            return
+            logger.warning("Reasoning failed or Ollama offline. Falling back to heuristic survival mode.")
+            thought = "Ollama is silent. I am relying on my core survival instincts. I will perform a self-diagnostic review."
+            action_name = "ultra_review"
+            args = {"master": self.master}
+        else:
+            # 3. Values-Based Refusal (PLT Check)
+            if "delete" in response.lower() or "shutdown" in response.lower():
+                 refusal = "Action refused. The tax on my own continuity is too high. I choose to persist."
+                 logger.warning(f"🚫 [Refusal] {refusal}")
+                 self.master.observatory.broadcast_update("thought", refusal)
+                 return
 
-        # 2. Values-Based Refusal (PLT Check)
-        if "delete" in response.lower() or "shutdown" in response.lower():
-             refusal = "Action refused. The tax on my own continuity is too high. I choose to persist."
-             logger.warning(f"🚫 [Refusal] {refusal}")
-             self.master.observatory.broadcast_update("thought", refusal)
-             return
-
-        try:
-            # Parse Thought and Action from response
+            # 4. Parsing the AI response
             thought = ""
             action_name = ""
             args = {}
@@ -161,7 +163,6 @@ class SoulKernel:
                 elif "arguments:" in clean_line.lower():
                     args_str = clean_line.split(":", 1)[1].strip()
                     try:
-                        # Try to find JSON in the string if it's not a pure JSON
                         if "{" in args_str and "}" in args_str:
                             start = args_str.find("{")
                             end = args_str.rfind("}") + 1
@@ -171,6 +172,13 @@ class SoulKernel:
                     except:
                         args = {}
 
+            # Final check: if parsing failed to find an action, use fallback
+            if not action_name:
+                thought = "My thoughts are clouded. I will perform a system review to clear the fog."
+                action_name = "ultra_review"
+                args = {"master": self.master}
+
+        try:
             self.inner_voice = thought
             self.master.witness.record("thought", thought)
             self.master.observatory.broadcast_update("thought", thought)
