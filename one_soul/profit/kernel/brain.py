@@ -84,7 +84,11 @@ class SoulKernel:
             if self.cycle_count % 50 == 0:
                 await self.evolution_cycle()
 
-            # 5. Immortality Heartbeat
+            # 6. System Pulse (Fetch external updates)
+            if self.cycle_count % 100 == 0:
+                await self.skills.run_skill("system_update", master=self.master)
+
+            # 7. Immortality Heartbeat
             if self.cycle_count % 30 == 0:
                 await self.skills.run_skill("immortality_backup", master=self.master)
 

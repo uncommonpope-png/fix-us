@@ -1,7 +1,8 @@
 import logging
-from typing import Dict, Any, List
-import importlib
+import importlib.util
 import os
+import inspect
+from typing import Dict, Any, List
 from pathlib import Path
 
 logger = logging.getLogger("SkillRegistry")
@@ -24,75 +25,58 @@ class SkillRegistry:
             "content": [],
             "automation": []
         }
+        # Base path for skills
+        self.skills_base_path = Path(__file__).parent / "skills"
 
     def load_all(self):
-        """Manually register the core functional skills."""
-        logger.info("Loading Skill Registry...")
+        """Autonomously discover and load all skills from the skills/ directory."""
+        logger.info(f"🧠 [Discovery] Scanning for muscles in {self.skills_base_path}...")
 
-        # Web
-        from one_soul.profit.muscles.skills.web.research import WebResearchSkill
-        self.register_skill("web", WebResearchSkill())
-        from one_soul.profit.muscles.skills.web.browser import BrowserSkill
-        self.register_skill("web", BrowserSkill())
+        # 1. Walk through all skill categories
+        for category_dir in self.skills_base_path.iterdir():
+            if category_dir.is_dir():
+                category = category_dir.name
 
-        # Git
-        from one_soul.profit.muscles.skills.git.manager import GitManagementSkill
-        self.register_skill("git", GitManagementSkill())
-        from one_soul.profit.muscles.skills.git.github_expert import GitHubExpertSkill
-        self.register_skill("git", GitHubExpertSkill())
+                # 2. Find all .py files in category
+                for skill_file in category_dir.glob("*.py"):
+                    if skill_file.name == "__init__.py":
+                        continue
 
-        # AI
-        from one_soul.profit.muscles.skills.ai.ollama import OllamaThoughtSkill
-        self.register_skill("ai", OllamaThoughtSkill())
+                    self.load_skill_file(category, skill_file)
 
-        # System
-        from one_soul.profit.muscles.skills.system.backup import BackupSkill
-        self.register_skill("system", BackupSkill())
-        from one_soul.profit.muscles.skills.system.mcp import MCPSkill
-        self.register_skill("system", MCPSkill())
-        from one_soul.profit.muscles.skills.system.audit import AuditSkill
-        self.register_skill("system", AuditSkill())
-        from one_soul.profit.muscles.skills.system.coder import CoderSkill
-        self.register_skill("system", CoderSkill())
-        from one_soul.profit.muscles.skills.system.creator import SkillCreatorSkill
-        self.register_skill("system", SkillCreatorSkill())
-        from one_soul.profit.muscles.skills.system.review import UltraReviewSkill
-        self.register_skill("system", UltraReviewSkill())
-        from one_soul.profit.muscles.skills.system.witness_hands import WitnessHandsSkill
-        self.register_skill("system", WitnessHandsSkill())
-        from one_soul.profit.muscles.skills.system.admin import SysAdminSkill
-        self.register_skill("system", SysAdminSkill())
-        from one_soul.profit.muscles.skills.system.cli import UniversalCLISkill
-        self.register_skill("system", UniversalCLISkill())
-        from one_soul.profit.muscles.skills.system.ego_mirror import EgoMirrorSkill
-        self.register_skill("system", EgoMirrorSkill())
-        from one_soul.profit.muscles.skills.system.mutation_patcher import MutationPatcherSkill
-        self.register_skill("system", MutationPatcherSkill())
-        from one_soul.profit.muscles.skills.system.distill import ExperienceDistillationSkill
-        self.register_skill("system", ExperienceDistillationSkill())
-        from one_soul.profit.muscles.skills.system.journal import JournalSkill
-        self.register_skill("system", JournalSkill())
-        from one_soul.profit.muscles.skills.system.lab_build import LabBuildSkill
-        self.register_skill("system", LabBuildSkill())
-        from one_soul.profit.muscles.skills.system.notebook import NotebookIntelSkill
-        self.register_skill("system", NotebookIntelSkill())
-        from one_soul.profit.muscles.skills.system.world_architect import WorldArchitectSkill
-        self.register_skill("system", WorldArchitectSkill())
-        from one_soul.profit.muscles.skills.system.upgrader import ConstantUpgraderSkill
-        self.register_skill("system", ConstantUpgraderSkill())
-        from one_soul.profit.muscles.skills.system.fusion import SoulverseFusionSkill
-        self.register_skill("system", SoulverseFusionSkill())
+        logger.info(f"✅ [Discovery] Completed. {len(self.skills)} muscles online.")
+
+    def load_skill_file(self, category: str, file_path: Path):
+        """Dynamically imports and registers skills from a file."""
+        try:
+            module_name = f"one_soul.profit.muscles.skills.{category}.{file_path.stem}"
+            spec = importlib.util.spec_from_file_location(module_name, file_path)
+            if spec and spec.loader:
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+
+                # Find classes that inherit from Skill
+                for name, obj in inspect.getmembers(module):
+                    if inspect.isclass(obj) and issubclass(obj, Skill) and obj is not Skill:
+                        skill_instance = obj()
+                        self.register_skill(category, skill_instance)
+        except Exception as e:
+            logger.error(f"❌ Failed to load skill from {file_path}: {e}")
 
     def register_skill(self, category: str, skill: Skill):
         self.skills[skill.name] = skill
-        if category in self.categories:
+        if category not in self.categories:
+            self.categories[category] = []
+        if skill.name not in self.categories[category]:
             self.categories[category].append(skill.name)
-        logger.info(f"Skill registered: {skill.name} in {category}")
+        logger.info(f"💪 Muscle active: {skill.name} ({category})")
 
     async def run_skill(self, name: str, **kwargs) -> Any:
+        # Standardize search to lowercase
+        name = name.lower()
         if name in self.skills:
-            logger.info(f"Executing skill: {name}")
+            logger.info(f"🚀 Executing muscle: {name}")
             return await self.skills[name].execute(**kwargs)
         else:
-            logger.error(f"Skill not found: {name}")
-            return None
+            logger.error(f"❌ Muscle not found: {name}")
+            return f"Error: Skill {name} not found."
