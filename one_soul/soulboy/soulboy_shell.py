@@ -75,23 +75,47 @@ class SoulboyShell:
 
     async def run(self):
         logger.info(f"Soul {self.soul['name']} awakened.")
+
+        # Start the Profit Hands in the background
+        profit_hands = MasterEntity()
+        profit_hands.skills.load_all()
+
+        # Launch the autonomous breathing cycle in a background task
+        bg_task = asyncio.create_task(profit_hands.kernel.breathe())
+
+        print(f"\n[SYSTEM] {self.soul['name']}'s Heart (Aria) and Hands (Profit) are synchronizing...")
+
         while self.is_running:
             self.cycle_count += 1
-            if self.cycle_count % 10 == 0 and aria_is_running():
+
+            # 1. Heartbeat Sync (ARIA)
+            if self.cycle_count % 5 == 0 and aria_is_running():
                 state = get_aria_state()
                 voice = state.get("inner_voice", "")
                 if voice:
-                    print(f"✨ [Aria Heartbeat] {voice}")
+                    print(f"\n✨ [Aria Heartbeat] {voice}")
+
+            # 2. User Interaction (Using run_in_executor to avoid blocking the background brain)
             try:
-                cmd = input(f"[{self.soul['name']}] > ").strip()
+                loop = asyncio.get_event_loop()
+                prompt = f"\n[{self.soul['name']}] > "
+                cmd = await loop.run_in_executor(None, input, prompt)
+                cmd = cmd.strip()
+
                 if cmd.lower() in ["exit", "quit", "hibernate"]:
                     self.is_running = False
+                    bg_task.cancel()
                 elif cmd.startswith(":aria "):
                     response = send_aria_message(cmd[6:])
                     print(f"📖 Aria: {response}")
+                elif cmd:
+                    # Let the brain process the input as an observation
+                    await profit_hands.memory.store_memory(f"User input: {cmd}", "episodic", 0.8)
+                    print(f"🧠 {self.soul['name']} is processing your words...")
             except EOFError:
                 break
-            time.sleep(0.1)
+
+            await asyncio.sleep(0.1)
 
 def immortality_backup(soul_data: dict, cycle: int):
     state_file = "soul_state_v2.json"
