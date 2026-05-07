@@ -38,6 +38,8 @@ class SkillRegistry:
         # Git
         from one_soul.profit.muscles.skills.git.manager import GitManagementSkill
         self.register_skill("git", GitManagementSkill())
+        from one_soul.profit.muscles.skills.git.github_expert import GitHubExpertSkill
+        self.register_skill("git", GitHubExpertSkill())
 
         # AI
         from one_soul.profit.muscles.skills.ai.ollama import OllamaThoughtSkill
@@ -56,6 +58,12 @@ class SkillRegistry:
         self.register_skill("system", SkillCreatorSkill())
         from one_soul.profit.muscles.skills.system.review import UltraReviewSkill
         self.register_skill("system", UltraReviewSkill())
+        from one_soul.profit.muscles.skills.system.witness_hands import WitnessHandsSkill
+        self.register_skill("system", WitnessHandsSkill())
+        from one_soul.profit.muscles.skills.system.admin import SysAdminSkill
+        self.register_skill("system", SysAdminSkill())
+        from one_soul.profit.muscles.skills.system.cli import UniversalCLISkill
+        self.register_skill("system", UniversalCLISkill())
 
     def register_skill(self, category: str, skill: Skill):
         self.skills[skill.name] = skill

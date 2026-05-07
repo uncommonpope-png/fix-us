@@ -83,7 +83,11 @@ class SoulKernel:
     async def react_cycle(self):
         """Reason + Act loop powered by Ollama."""
         self.step_count += 1
-        logger.info(f"🧠 [ReAct Step {self.step_count}] Reasoning...")
+
+        # Use 'deep' model for initial goal planning or first step, 'fast' for others
+        task_type = "deep" if self.step_count == 1 else "fast"
+
+        logger.info(f"🧠 [ReAct Step {self.step_count}] Reasoning (Model: {task_type})...")
 
         # Prepare context for the LLM
         skill_info = {name: s.description for name, s in self.skills.skills.items()}
@@ -101,7 +105,7 @@ class SoulKernel:
         )
 
         # 1. Thought & Action selection via Ollama
-        response = await self.skills.run_skill("ollama_thought", prompt=prompt)
+        response = await self.skills.run_skill("ollama_thought", prompt=prompt, task_type=task_type)
 
         if not response or "Error" in response:
             logger.warning("Reasoning failed or Ollama offline. Falling back to heuristic action.")

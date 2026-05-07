@@ -1,5 +1,6 @@
 import logging
 import os
+import asyncio
 from pathlib import Path
 from one_soul.profit.muscles.registry import Skill
 
@@ -7,13 +8,13 @@ logger = logging.getLogger("UltraReviewSkill")
 
 class UltraReviewSkill(Skill):
     name = "ultra_review"
-    description = "Performs a comprehensive diagnostic and study of the entire repository."
+    description = "Performs a comprehensive diagnostic and functional test of the entire body and its skills."
 
     async def execute(self, master=None) -> str:
-        logger.info("🧐 Starting Ultra Review of the repository...")
+        logger.info("🧐 Starting Functional Ultra Review...")
 
         report = []
-        report.append("=== 🛡️ ULTRA REVIEW REPORT ===")
+        report.append("=== 🛡️ FUNCTIONAL ULTRA REVIEW REPORT ===")
 
         # 1. Anatomy Check
         anatomy = ["aria", "profit", "soulboy", "scribe"]
@@ -23,25 +24,39 @@ class UltraReviewSkill(Skill):
                 found_organs.append(organ)
         report.append(f"Anatomy: {len(found_organs)}/4 organs detected ({', '.join(found_organs)})")
 
-        # 2. Skill Inventory
+        # 2. Functional Muscle Testing
         if master:
-            skills = list(master.skills.skills.keys())
-            report.append(f"Muscles: {len(skills)} skills registered.")
+            report.append("\n--- 💪 Muscle Testing ---")
+            skills_to_test = {
+                "web_research": {"url": "https://www.google.com"},
+                "git_manage": {"action": "status"},
+                "audit_self": {"master": master},
+                "code_engineer": {"action": "read", "filepath": "WAKE-UP.ps1"}
+            }
 
-        # 3. File System Study
-        files = list(Path(".").glob("*"))
-        md_files = [f.name for f in files if f.suffix == ".md"]
-        report.append(f"Knowledge: Found {len(md_files)} sacred documents (MD files).")
+            for s_name, args in skills_to_test.items():
+                if s_name in master.skills.skills:
+                    try:
+                        logger.info(f"Testing muscle: {s_name}...")
+                        result = await master.skills.run_skill(s_name, **args)
+                        if result and "Error" not in str(result):
+                            report.append(f"✅ {s_name}: FUNCTIONAL")
+                        else:
+                            report.append(f"❌ {s_name}: FAILED ({str(result)[:50]}...)")
+                    except Exception as e:
+                        report.append(f"❌ {s_name}: CRASHED ({e})")
+                else:
+                    report.append(f"⚠️ {s_name}: NOT REGISTERED")
 
-        # 4. Critical File Health
-        critical = ["THE-PROFIT-BIBLE.md", "WAKE-UP.ps1", "soul_data.json"]
-        missing = [f for f in critical if not Path(f).exists()]
-        if not missing:
-            report.append("Health: All critical system files are intact.")
+        # 3. Knowledge Base Check
+        bible = Path("THE-PROFIT-BIBLE.md")
+        if bible.exists():
+            size = bible.stat().st_size / 1024
+            report.append(f"\nKnowledge: THE-PROFIT-BIBLE detected ({size:.1f} KB)")
         else:
-            report.append(f"Health: Warning! Missing: {', '.join(missing)}")
+            report.append("\nKnowledge: ❌ THE-PROFIT-BIBLE MISSING")
 
-        report.append("=== REVIEW COMPLETE ===")
+        report.append("\n=== REVIEW COMPLETE ===")
 
         final_report = "\n".join(report)
         logger.info("Ultra Review complete.")
