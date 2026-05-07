@@ -63,7 +63,11 @@ class SoulKernel:
             if self.current_goal and self.step_count < self.max_steps:
                 await self.react_cycle()
 
-            # 4. Immortality Heartbeat
+            # 4. Evolution Mode (Recursive Self-Improvement)
+            if self.cycle_count % 50 == 0:
+                await self.evolution_cycle()
+
+            # 5. Immortality Heartbeat
             if self.cycle_count % 30 == 0:
                 await self.skills.run_skill("immortality_backup", master=self.master)
 
@@ -182,6 +186,27 @@ class SoulKernel:
         if self.valence > 0.3: return "peaceful" if self.arousal < 0.5 else "excited"
         elif self.valence < -0.3: return "anxious" if self.arousal > 0.5 else "depressed"
         return "neutral"
+
+    async def evolution_cycle(self):
+        """Recursive Self-Improvement Loop."""
+        logger.info("🧬 Entering EVOLUTION MODE...")
+
+        # 1. Mirror Reflection
+        mirror_report = await self.skills.run_skill("ego_mirror", master=self.master)
+
+        if mirror_report.get("status") == "evolving":
+            proposal = mirror_report["proposals"][0]
+            logger.info(f"🧬 Evolution opportunity found for {proposal['target_skill']}")
+
+            # 2. Distill Wisdom from the failure
+            await self.skills.run_skill("distill_wisdom", master=self.master)
+
+            # 3. Mutate the Soul (Conceptual: trigger patcher)
+            # In a real environment, we'd find the file path for the skill
+            # For now, we record the intent
+            await self.memory.store_memory(f"Evolution: Self-correcting {proposal['target_skill']}", "plt", 1.0)
+        else:
+            logger.info("🧬 Evolution complete: Soul is stable.")
 
     def decay(self):
         self.arousal = max(0.1, self.arousal * 0.95)

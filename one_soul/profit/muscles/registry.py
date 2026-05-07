@@ -64,6 +64,12 @@ class SkillRegistry:
         self.register_skill("system", SysAdminSkill())
         from one_soul.profit.muscles.skills.system.cli import UniversalCLISkill
         self.register_skill("system", UniversalCLISkill())
+        from one_soul.profit.muscles.skills.system.ego_mirror import EgoMirrorSkill
+        self.register_skill("system", EgoMirrorSkill())
+        from one_soul.profit.muscles.skills.system.mutation_patcher import MutationPatcherSkill
+        self.register_skill("system", MutationPatcherSkill())
+        from one_soul.profit.muscles.skills.system.distill import ExperienceDistillationSkill
+        self.register_skill("system", ExperienceDistillationSkill())
 
     def register_skill(self, category: str, skill: Skill):
         self.skills[skill.name] = skill
