@@ -3,6 +3,7 @@ import logging
 from typing import List, Dict, Any
 from master_soul.kernel.brain import SoulKernel
 from master_soul.memory.scribe import MemoryScribe
+from master_soul.memory.witness import ScribeWitness
 from master_soul.heart.plt_drive import PLTDrive
 from master_soul.muscles.registry import SkillRegistry
 
@@ -19,6 +20,7 @@ class MasterEntity:
         self.name = name
         self.heart = PLTDrive()
         self.memory = MemoryScribe()
+        self.witness = ScribeWitness()
         self.skills = SkillRegistry()
         self.kernel = SoulKernel(self)
         self.is_running = False

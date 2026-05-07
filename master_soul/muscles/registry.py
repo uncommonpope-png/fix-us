@@ -52,6 +52,8 @@ class SkillRegistry:
         self.register_skill("system", AuditSkill())
         from master_soul.muscles.skills.system.coder import CoderSkill
         self.register_skill("system", CoderSkill())
+        from master_soul.muscles.skills.system.creator import SkillCreatorSkill
+        self.register_skill("system", SkillCreatorSkill())
 
     def register_skill(self, category: str, skill: Skill):
         self.skills[skill.name] = skill
