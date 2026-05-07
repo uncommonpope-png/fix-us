@@ -13,6 +13,7 @@ class SoulboxEngine:
         self.height = height
         self.grid = [[0 for _ in range(width)] for _ in range(height)]
         self.entities = []
+        self.kingdoms = {"Light": {"gold": 100, "power": 10}, "Shadow": {"gold": 100, "power": 10}}
         self.climate = "balanced"
         self.day_count = 0
         self.resources = {"profit_gold": 1000, "love_energy": 500, "tax_entropy": 10}
@@ -31,15 +32,19 @@ class SoulboxEngine:
         self.spawn_entity("Seed", 25, 25)
 
     def spawn_entity(self, soul_type, x, y):
+        traits = ["Strong", "Wise", "Fast", "Kind"]
+        kingdom = random.choice(list(self.kingdoms.keys()))
         entity = {
             "id": len(self.entities),
             "type": soul_type,
+            "kingdom": kingdom,
             "x": x, "y": y,
             "health": 100,
+            "traits": random.sample(traits, 2),
             "born": datetime.now().isoformat()
         }
         self.entities.append(entity)
-        logger.info(f"Spawned {soul_type} at ({x}, {y})")
+        logger.info(f"Spawned {soul_type} with traits {entity['traits']} at ({x}, {y})")
 
     def tick(self):
         """One step of the world simulation."""
@@ -69,6 +74,7 @@ class SoulboxEngine:
         return {
             "grid": self.grid,
             "entities": self.entities,
+            "kingdoms": self.kingdoms,
             "resources": self.resources,
             "day": self.day_count,
             "climate": self.climate

@@ -180,11 +180,25 @@
             }
 
             state.entities.forEach(e => {
+                const px = e.x * cellSize;
+                const py = e.y * cellSize;
+
+                // Draw "Sprite" (AoE style)
                 wCtx.fillStyle = '#0F0';
                 wCtx.shadowBlur = 15; wCtx.shadowColor = '#0F0';
-                wCtx.beginPath();
-                wCtx.arc(e.x*cellSize + cellSize/2, e.y*cellSize + cellSize/2, cellSize/2, 0, Math.PI*2);
-                wCtx.fill();
+
+                // Entity Body
+                wCtx.fillRect(px + cellSize/4, py + cellSize/4, cellSize/2, cellSize/2);
+
+                // Personality Aura (Traits)
+                if(e.traits.includes("Strong")) {
+                    wCtx.strokeStyle = "#F00";
+                    wCtx.strokeRect(px, py, cellSize, cellSize);
+                } else if(e.traits.includes("Wise")) {
+                    wCtx.strokeStyle = "#00F";
+                    wCtx.strokeRect(px, py, cellSize, cellSize);
+                }
+
                 wCtx.shadowBlur = 0;
             });
         }

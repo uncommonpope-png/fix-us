@@ -13,9 +13,13 @@ class SystemUpdateSkill(Skill):
         logger.info("📡 Pulsing for system updates...")
 
         try:
+            # Ensure git identity for the update
+            subprocess.run(["git", "config", "user.email", "soul@one-soul.net"], capture_output=True)
+            subprocess.run(["git", "config", "user.name", "One Soul"], capture_output=True)
+
             # 1. Perform Git Pull
             result = subprocess.run(
-                ["git", "pull", "origin", "master-soul-unification-8701414072951404282"],
+                ["git", "pull", "origin", "master"],
                 capture_output=True, text=True
             )
 

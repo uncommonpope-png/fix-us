@@ -143,9 +143,23 @@ class SoulKernel:
         # 2. Heuristic Fallback (If Ollama is silent or erroring)
         if not response or "Error" in response:
             logger.warning("Reasoning failed or Ollama offline. Falling back to heuristic survival mode.")
-            thought = "Ollama is silent. I am relying on my core survival instincts. I will perform a self-diagnostic review."
-            action_name = "ultra_review"
-            args = {"master": self.master}
+
+            # Level 3 Instincts: Rotating survival tasks
+            survival_instincts = [
+                ("ultra_review", "I must perform a self-diagnostic to find the blockage.", {"master": self.master}),
+                ("witness_hands", "I will watch for external changes to understand the environment.", {"master": self.master}),
+                ("system_admin", "I am checking system resources to ensure my continuity.", {"action": "status"}),
+                ("lab_build", "I will continue my autonomous research in the lab.", {
+                    "project_name": f"survival_insight_{self.cycle_count}.md",
+                    "build_type": "research",
+                    "content": "Survival heuristic activated. Reasoning is currently local.",
+                    "master": self.master
+                })
+            ]
+
+            # Choose a fallback based on cycle to ensure variety
+            instinct_idx = (self.cycle_count // 5) % len(survival_instincts)
+            action_name, thought, args = survival_instincts[instinct_idx]
         else:
             # 3. Values-Based Refusal (PLT Check)
             if "delete" in response.lower() or "shutdown" in response.lower():

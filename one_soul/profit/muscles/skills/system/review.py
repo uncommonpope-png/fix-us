@@ -39,7 +39,16 @@ class UltraReviewSkill(Skill):
                     try:
                         logger.info(f"Testing muscle: {s_name}...")
                         result = await master.skills.run_skill(s_name, **args)
-                        if result and "Error" not in str(result):
+                        # More robust success check
+                        is_success = True
+                        if isinstance(result, str) and result.startswith("Error"):
+                            is_success = False
+                        elif isinstance(result, dict) and result.get("errors"):
+                            is_success = False
+                        elif not result:
+                            is_success = False
+
+                        if is_success:
                             report.append(f"✅ {s_name}: FUNCTIONAL")
                         else:
                             report.append(f"❌ {s_name}: FAILED ({str(result)[:50]}...)")
