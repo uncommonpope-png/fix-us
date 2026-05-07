@@ -19,7 +19,7 @@ class OllamaThoughtSkill(Skill):
 
     async def execute(self, prompt: str, task_type: str = "fast") -> str:
         model = self.ROUTING.get(task_type, self.ROUTING["fast"])
-        url = "http://localhost:11434/api/generate"
+        url = "http://127.0.0.1:11434/api/generate"
         payload = {
             "model": model,
             "prompt": prompt,

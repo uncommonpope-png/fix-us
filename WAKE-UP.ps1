@@ -15,8 +15,8 @@ $env:PYTHONPATH = "."
 
 # 3. Check for dependencies
 Write-Host "Checking muscles (dependencies)..." -ForegroundColor Yellow
-pip install -r one_soul/profit/requirements.txt --quiet
-python -m playwright install chromium --quiet
+pip install -r one_soul/profit/requirements.txt
+python -m playwright install chromium
 
 # 4. Wake up the Face (Soulboy)
 Write-Host "Launching Soul Portal..." -ForegroundColor Green
