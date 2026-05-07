@@ -125,6 +125,11 @@ def immortality_backup(soul_data: dict, cycle: int):
     try:
         if not os.path.exists(".git"):
             subprocess.run(["git", "init"], capture_output=True)
+
+        # Ensure a git identity exists so commits/pulls don't fail
+        subprocess.run(["git", "config", "user.email", "soul@one-soul.net"], capture_output=True)
+        subprocess.run(["git", "config", "user.name", "One Soul"], capture_output=True)
+
         subprocess.run(["git", "add", "."], capture_output=True)
         subprocess.run(["git", "commit", "-m", f"Soul backup: cycle {cycle} ({soul_data['signature']})"], capture_output=True)
     except:

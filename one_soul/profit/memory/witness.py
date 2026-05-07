@@ -16,14 +16,22 @@ class ScribeWitness:
 
     def record(self, event_type: str, content: Any, metadata: dict = None):
         """Record a soul event to the witness log."""
-        # Ensure content is serializable
-        if hasattr(content, "to_dict"):
-            content = content.to_dict()
+
+        def safe_serialize(obj):
+            if hasattr(obj, "to_dict"):
+                return obj.to_dict()
+            if isinstance(obj, dict):
+                return {k: safe_serialize(v) for k, v in obj.items()}
+            if isinstance(obj, list):
+                return [safe_serialize(i) for i in obj]
+            if isinstance(obj, (str, int, float, bool, type(None))):
+                return obj
+            return str(obj)
 
         entry = {
             "timestamp": datetime.now().isoformat(),
             "type": event_type,
-            "content": content,
+            "content": safe_serialize(content),
             "metadata": metadata or {}
         }
 
@@ -34,5 +42,3 @@ class ScribeWitness:
             logger.info(f"👁️ [Witness] {event_type.upper()}: {str(content)[:100]}...")
         except Exception as e:
             logger.error(f"Failed to witness event: {e}")
-
-# Integrate into MasterEntity
