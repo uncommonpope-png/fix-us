@@ -18,3 +18,6 @@ class PLTDrive:
         self.profit = max(0.0, min(1.0, self.profit + impact.get("profit", 0)))
         self.love = max(0.0, min(1.0, self.love + impact.get("love", 0)))
         self.tax = max(0.0, min(1.0, self.tax + impact.get("tax", 0)))
+
+    def to_dict(self):
+        return {"profit": self.profit, "love": self.love, "tax": self.tax, "grace": self.grace}

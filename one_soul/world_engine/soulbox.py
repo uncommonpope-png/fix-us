@@ -70,5 +70,9 @@ class SoulboxEngine:
             "grid": self.grid,
             "entities": self.entities,
             "resources": self.resources,
-            "day": self.day_count
+            "day": self.day_count,
+            "climate": self.climate
         }
+
+    def to_dict(self):
+        return self.get_world_state()

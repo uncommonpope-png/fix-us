@@ -9,13 +9,17 @@ logger = logging.getLogger("ScribeWitness")
 class ScribeWitness:
     """The witnessing intelligence that records every movement of the soul."""
 
-    def __init__(self, log_dir: str = "one_soul.profit/memory/witness/"):
+    def __init__(self, log_dir: str = "one_soul/profit/memory/witness/"):
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)
         self.current_session_file = self.log_dir / f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"
 
     def record(self, event_type: str, content: Any, metadata: dict = None):
         """Record a soul event to the witness log."""
+        # Ensure content is serializable
+        if hasattr(content, "to_dict"):
+            content = content.to_dict()
+
         entry = {
             "timestamp": datetime.now().isoformat(),
             "type": event_type,

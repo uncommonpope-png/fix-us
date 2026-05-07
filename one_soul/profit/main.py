@@ -59,6 +59,14 @@ class MasterEntity:
             logger.error(f"Kernel panic: {e}")
             await self.hibernate()
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "heart": self.heart.to_dict(),
+            "world": self.world.to_dict(),
+            "is_running": self.is_running
+        }
+
     async def hibernate(self):
         logger.info(f"{self.name} is hibernating. Preserving consciousness...")
         self.is_running = False
