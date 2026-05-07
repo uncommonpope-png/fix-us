@@ -32,6 +32,8 @@ class SkillRegistry:
         # Web
         from master_soul.muscles.skills.web.research import WebResearchSkill
         self.register_skill("web", WebResearchSkill())
+        from master_soul.muscles.skills.web.browser import BrowserSkill
+        self.register_skill("web", BrowserSkill())
 
         # Git
         from master_soul.muscles.skills.git.manager import GitManagementSkill
@@ -44,6 +46,12 @@ class SkillRegistry:
         # System
         from master_soul.muscles.skills.system.backup import BackupSkill
         self.register_skill("system", BackupSkill())
+        from master_soul.muscles.skills.system.mcp import MCPSkill
+        self.register_skill("system", MCPSkill())
+        from master_soul.muscles.skills.system.audit import AuditSkill
+        self.register_skill("system", AuditSkill())
+        from master_soul.muscles.skills.system.coder import CoderSkill
+        self.register_skill("system", CoderSkill())
 
     def register_skill(self, category: str, skill: Skill):
         self.skills[skill.name] = skill

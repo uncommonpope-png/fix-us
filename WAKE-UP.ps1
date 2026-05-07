@@ -16,6 +16,7 @@ $env:PYTHONPATH = "."
 # 3. Check for dependencies
 Write-Host "📦 Checking muscles (dependencies)..." -ForegroundColor Yellow
 pip install -r master_soul/requirements.txt --quiet
+python -m playwright install chromium
 
 # 4. Check for Ollama (optional but recommended)
 if (!(Get-Command ollama -ErrorAction SilentlyContinue)) {
