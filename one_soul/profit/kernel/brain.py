@@ -114,9 +114,8 @@ class SoulKernel:
             await asyncio.sleep(5)
 
     def set_initial_goal(self):
-        # drive = self.heart.dominant_drive()
-        # self.current_goal = f"Disrupt the industry via autonomous {drive} optimization."
-        self.current_goal = "Perform an Ultra Review and study the Self-Evolution mechanics of the repository."
+        # The Grand Goal of Evolution
+        self.current_goal = "Ingest the Jules Methodology and prove my skills by performing a self-audit and obsidian sync."
         self.step_count = 0
         self.observations = []
         logger.info(f"🎯 New High-Level Goal: {self.current_goal}")

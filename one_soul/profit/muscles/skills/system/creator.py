@@ -18,17 +18,26 @@ class SkillCreatorSkill(Skill):
 
         prompt = f"""
         Generate a Python class for a new AI skill named '{skill_name}' for the following purpose: {purpose}.
-        The class must inherit from `Skill` and follow this structure:
 
+        You MUST follow THE SACRED METHODOLOGY OF JULES:
+        1. Include robust logging and error handling.
+        2. Ensure the skill is 'Verifiable' (returns meaningful results).
+        3. Inherit from `one_soul.profit.muscles.registry.Skill`.
+
+        Structure:
         import logging
         from one_soul.profit.muscles.registry import Skill
 
         class {skill_name}Skill(Skill):
             name = "{skill_name.lower()}"
             description = "{purpose}"
-            async def execute(self, **kwargs):
-                # Implementation here
-                return "Skill executed"
+            async def execute(self, master=None, **kwargs):
+                logger.info("Executing {skill_name}...")
+                try:
+                    # Implementation
+                    return "Success: result"
+                except Exception as e:
+                    return f"Error: {{e}}"
 
         Return ONLY the Python code.
         """
