@@ -23,7 +23,7 @@ class GoogleBridgeSkill(Skill):
         if "browser_action" in master.skills.skills:
             # We use the browser skill to open the page.
             # Note: This will likely require manual auth in the browser session if not already logged in.
-            result = await master.skills.run_skill("browser_action", action="navigate", url=target_url)
+            result = await master.skills.run_skill("browser_action", url=target_url)
             return f"Success: Opened {service}. Note: Manual authentication for uncommonpope@gmail.com may be required in the browser window."
         else:
             return "Error: Browser muscle not found. Cannot bridge to Google."
