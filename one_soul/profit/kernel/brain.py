@@ -123,7 +123,7 @@ class SoulKernel:
 
     def set_initial_goal(self):
         # The Grand Goal of Evolution
-        self.current_goal = "Ingest the Jules Methodology and prove my skills by performing a self-audit and obsidian sync."
+        self.current_goal = "Study the Hall of Excellence in the Profit Bible and integrate the patterns of Claude Code and AlphaGo into my own heuristics."
         self.step_count = 0
         self.observations = []
         logger.info(f"🎯 New High-Level Goal: {self.current_goal}")
