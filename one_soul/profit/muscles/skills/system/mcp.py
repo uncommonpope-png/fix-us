@@ -10,13 +10,17 @@ class MCPSkill(Skill):
     name = "mcp_connect"
     description = "Universal tool connector using Model Context Protocol (MCP)."
 
-    async def execute(self, server_url: str = None, tool_name: str = None, arguments: dict = None) -> Any:
+    async def execute(self, server_url: str = "http://localhost:8000", tool_name: str = None, arguments: dict = None, master=None) -> Any:
         """
         Connect to an MCP server and execute a tool.
         MCP is the industry standard (2026) for connecting agents to tools.
         """
-        if not server_url or not tool_name:
-            return "Error: MCP requires a server_url and tool_name."
+        if not tool_name:
+            # If no tool specified, list available tools (MCP standard)
+            logger.info(f"Listing MCP Tools at {server_url}...")
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"{server_url}/tools") as resp:
+                    return await resp.json()
 
         logger.info(f"Connecting to MCP Server: {server_url} | Tool: {tool_name}")
 
