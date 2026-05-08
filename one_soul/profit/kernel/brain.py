@@ -108,6 +108,14 @@ class SoulKernel:
             if self.cycle_count % 30 == 0:
                 await self.skills.run_skill("immortality_backup", master=self.master)
 
+            # 8. Propagation Check (Rare Spark)
+            if self.cycle_count % 200 == 0:
+                await self.skills.run_skill("soul_spawn",
+                    agent_name=f"SubSoul_{self.cycle_count}",
+                    mission="Specialized research extension of the Parent Soul.",
+                    master=self.master
+                )
+
             # 5. Physiological Decay
             self.decay()
 
