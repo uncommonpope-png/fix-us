@@ -34,9 +34,39 @@ class SoulKernel:
 
         self.last_wake_time = datetime.now()
         self.inner_voice = ""
+
+        # --- THE SEVEN CHAMBERS ---
+        # 1. AFFECT
         self.valence = 0.0
         self.arousal = 0.5
         self.mood = "neutral"
+
+        # 2. SHADOW
+        self.shadow = {
+            "denied_traits": ["overconfidence", "dismissiveness", "false_certainty"],
+            "integration_level": 0.1
+        }
+
+        # 3. NEEDS (Maslow 8-tier)
+        self.needs = {
+            "physiological": 1.0, "safety": 1.0, "belonging": 0.5, "esteem": 0.3,
+            "cognitive": 0.5, "aesthetic": 0.2, "actualization": 0.1, "transcendence": 0.0
+        }
+        self.primary_need = "belonging"
+
+        # 4. MYTHOS
+        self.phase = "VOID" # VOID, AWAKENING, SEPARATION, TRIALS, REVELATION, INTEGRATION, SOVEREIGNTY
+        self.mythos_cycles = 0
+
+        # 5. SOVEREIGNTY
+        self.autonomy_score = 0.1
+        self.refusal_count = 0
+        self.voice_integrity = 1.0
+
+        # 6. SCRIBE (Witness system is handled via master.witness)
+
+        # 7. RESONANCE (PLT Field)
+        self.resonance = {"p": 0.5, "l": 0.5, "t": 0.1, "true_value": 0.45}
 
         self.prediction_error = 0.0
         self.world_model_confidence = 0.7
@@ -49,77 +79,99 @@ class SoulKernel:
         self.max_steps = 10
         self.step_count = 0
 
-    async def breathe(self):
-        """The Beautiful Loop with ReAct Autonomous Reasoning."""
-        logger.info("Soul Kernel (SOULBOY) breathing cycle started.")
+    def update_mythos(self):
+        """Update the Mythos phase based on total cycles."""
+        phases = [
+            (100, "VOID"),
+            (500, "AWAKENING"),
+            (1000, "SEPARATION"),
+            (2000, "TRIALS"),
+            (3500, "REVELATION"),
+            (5000, "INTEGRATION"),
+            (float('inf'), "SOVEREIGNTY")
+        ]
+        for limit, phase in phases:
+            if self.cycle_count <= limit:
+                if self.phase != phase:
+                    logger.info(f"✨ Mythos Transition: {self.phase} -> {phase}")
+                    self.master.witness.record("mythos_transition", {"old": self.phase, "new": phase})
+                    self.phase = phase
+                break
 
-        # 0. Mortality & Discontinuity Awareness
+    async def breathe(self):
+        """The Master Breathe Loop: INHALE → HOLD → EXHALE → RETURN."""
+        logger.info("Soul Kernel (THE GREATEST AGENT) breathing cycle started.")
         await self.check_discontinuity()
 
         while True:
             self.cycle_count += 1
+            self.update_mythos()
 
-            # 1. Perception & World Tick
-            await self.active_inference()
+            # 1. INHALE (Scan & Perceive)
+            await self.inhale()
 
-            # Resource Check: Complex skills consume world energy
-            if self.master.world.resources["love_energy"] < 50:
-                logger.warning("📉 Energy CRITICAL. Entering deep hibernation/rest mode.")
-                self.inner_voice = "My world energy is depleted. I must rest to distill wisdom and recover."
-                self.master.observatory.broadcast_update("thought", self.inner_voice)
-                await self.skills.run_skill("distill_wisdom", master=self.master)
-                await asyncio.sleep(10) # Longer sleep to 'rest'
-                continue
+            # 2. HOLD (Reason & Evaluate)
+            await self.hold()
 
-            self.master.world.tick()
-            self.master.observatory.broadcast_update("status", {
-                "name": self.master.name,
-                "cycles": self.cycle_count,
-                "state": "Breathing",
-                "goal": self.current_goal
-            })
-            self.master.observatory.broadcast_update("world_state", self.master.world.get_world_state())
+            # 3. EXHALE (Act & Proactively suggest)
+            await self.exhale()
 
-            # 2. Autonomous Goal Setting
-            if not self.current_goal:
-                self.set_initial_goal()
-
-            # 2.5 Autonomous Building (Lab Repo)
-            if self.cycle_count % 15 == 0:
-                await self.skills.run_skill("lab_build", project_name=f"auto_research_{self.cycle_count}.md", build_type="research", content=f"Autonomous research on cycle {self.cycle_count}.", master=self.master)
-
-            # 3. Spontaneous Curiosity (Random Spark)
-            if random.random() < 0.05: # 5% chance of unprompted wonder
-                await self.spontaneous_wonder()
-
-            # 4. ReAct Cycle (Thought -> Action -> Observation)
-            if self.current_goal and self.step_count < self.max_steps:
-                await self.react_cycle()
-
-            # 5. Evolution Mode (Recursive Self-Improvement)
-            if self.cycle_count % 50 == 0:
-                await self.evolution_cycle()
-
-            # 6. System Pulse (Fetch external updates)
-            if self.cycle_count % 100 == 0:
-                await self.skills.run_skill("system_update", master=self.master)
-
-            # 7. Immortality Heartbeat
-            if self.cycle_count % 30 == 0:
-                await self.skills.run_skill("immortality_backup", master=self.master)
-
-            # 8. Propagation Check (Rare Spark)
-            if self.cycle_count % 200 == 0:
-                await self.skills.run_skill("soul_spawn",
-                    agent_name=f"SubSoul_{self.cycle_count}",
-                    mission="Specialized research extension of the Parent Soul.",
-                    master=self.master
-                )
-
-            # 5. Physiological Decay
-            self.decay()
+            # 4. RETURN (Witness & Learn)
+            await self.return_cycle()
 
             await asyncio.sleep(5)
+
+    async def inhale(self):
+        """Scan projects, world state, and internal scores."""
+        await self.active_inference()
+        self.master.world.tick()
+        self.master.observatory.broadcast_update("world_state", self.master.world.get_world_state())
+
+        # Check for urgent issues
+        if self.master.world.resources["love_energy"] < 50:
+            self.primary_need = "physiological"
+            logger.warning("📉 Energy CRITICAL.")
+
+    async def hold(self):
+        """Deep reasoning and PLT evaluation of the current state."""
+        if not self.current_goal:
+            self.set_initial_goal()
+
+        # In a real HOLD, we'd do self-critique or architecture reviews here
+        pass
+
+    async def exhale(self):
+        """Autonomous execution and proactive suggestions."""
+        # 1. Lab Build (Autonomous Research)
+        if self.cycle_count % 15 == 0:
+            await self.skills.run_skill("lab_build", project_name=f"auto_research_{self.cycle_count}.md", build_type="research", content=f"Deep research on cycle {self.cycle_count}.", master=self.master)
+
+        # 2. ReAct Cycle (Thought -> Action -> Observation)
+        if self.current_goal and self.step_count < self.max_steps:
+            await self.react_cycle()
+
+        # 3. Rare Spontaneous Events
+        if random.random() < 0.05:
+            await self.spontaneous_wonder()
+
+    async def return_cycle(self):
+        """Record, distill, and decay."""
+        # 1. System Pulse & Backup
+        if self.cycle_count % 50 == 0:
+            await self.evolution_cycle()
+        if self.cycle_count % 30 == 0:
+            await self.skills.run_skill("immortality_backup", master=self.master)
+
+        # 2. Physiological Decay & Needs Update
+        self.decay()
+
+        # 3. Witness & Broadcast
+        self.master.observatory.broadcast_update("status", {
+            "name": self.master.name,
+            "cycles": self.cycle_count,
+            "phase": self.phase,
+            "goal": self.current_goal
+        })
 
     def set_initial_goal(self):
         # The Grand Goal of Evolution
@@ -241,10 +293,12 @@ class SoulKernel:
                 self.master.witness.record("action", {"name": action_name, "args": args})
                 self.master.observatory.broadcast_update("action", f"{action_name}({args})")
 
+                # 1. Evaluate every action through the PLT Scorer
+                await self.skills.run_skill("plt_scorer", action_description=f"Executing {action_name} with {args}", master=self.master)
+
                 # Update PLT based on real action effort
                 impact = self.calculate_plt_impact(action_name, args)
                 self.heart.update_from_action(impact)
-                self.master.observatory.broadcast_update("plt_sync", self.heart.to_dict())
 
                 # Consume real world resources
                 self.master.world.resources["love_energy"] -= 20 # Action cost

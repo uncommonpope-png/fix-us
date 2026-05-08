@@ -2,6 +2,7 @@ import asyncio
 import logging
 from typing import List, Dict, Any
 from one_soul.profit.kernel.brain import SoulKernel
+from one_soul.profit.memory.context_model import ContextModel
 from one_soul.profit.memory.scribe import MemoryScribe
 from one_soul.profit.memory.witness import ScribeWitness
 from one_soul.profit.nervous_system.observatory import AriaObservatory
@@ -22,6 +23,7 @@ class MasterEntity:
         self.name = name
         self.heart = PLTDrive()
         self.memory = MemoryScribe()
+        self.context = ContextModel()
         self.witness = ScribeWitness()
         self.world = SoulboxEngine()
         self.observatory = AriaObservatory(self)
