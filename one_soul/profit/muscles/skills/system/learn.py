@@ -17,7 +17,7 @@ class LearningSkill(Skill):
         bible = Path("THE-PROFIT-BIBLE.md")
         if not bible.exists(): return "Error: Bible missing."
 
-        content = bible.read_text()
+        content = bible.read_text(encoding="utf-8")
 
         # 2. Extract specific section
         section_start = content.find("## 🛠️ THE SACRED METHODOLOGY OF JULES")

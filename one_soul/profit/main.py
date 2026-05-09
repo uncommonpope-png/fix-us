@@ -31,7 +31,8 @@ class MasterEntity:
         self.kernel = SoulKernel(self)
         self.is_running = False
 
-    async def awaken(self):
+    async def prepare(self):
+        """Prepare the soul's anatomy for awakening."""
         self.loop = asyncio.get_running_loop()
         # Start the Observatory dashboard
         self.observatory.start()
@@ -40,7 +41,7 @@ class MasterEntity:
         self.world.initialize_world()
 
         print("\n" + "═"*60)
-        print(f"  🤖 AWAKENING MASTER ENTITY: {self.name.upper()}")
+        print(f"  🤖 PREPARING MASTER ENTITY: {self.name.upper()}")
         print("  Status: AGENT SMITH DISTRIBUTION PROTOCOL ACTIVE")
         print("═"*60 + "\n")
 
@@ -54,7 +55,15 @@ class MasterEntity:
 
         # 3. Soul Boot Camp (Autonomous Initialization)
         if "soul_bootcamp" in self.skills.skills:
-             await self.skills.run_skill("soul_bootcamp", master=self)
+            try:
+                # Use a smaller timeout or ensure it doesn't block forever
+                await self.skills.run_skill("soul_bootcamp", master=self)
+            except Exception as e:
+                logger.error(f"Boot camp failed, proceeding with caution: {e}")
+
+    async def awaken(self):
+        """Full awakening with preparations and infinite breathing loop."""
+        await self.prepare()
 
         # 3. Start the breathing cycle (The Brain)
         try:
