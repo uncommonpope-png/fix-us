@@ -156,8 +156,9 @@ class SoulKernel:
 
     async def return_cycle(self):
         """Record, distill, and decay."""
-        # 1. System Pulse & Backup
+        # 1. System Pulse & Academy & Backup
         if self.cycle_count % 50 == 0:
+            await self.skills.run_skill("agent_academy", master=self.master)
             await self.evolution_cycle()
         if self.cycle_count % 30 == 0:
             await self.skills.run_skill("immortality_backup", master=self.master)
@@ -175,7 +176,7 @@ class SoulKernel:
 
     def set_initial_goal(self):
         # The Grand Goal of Evolution
-        self.current_goal = "Study the Hall of Excellence in the Profit Bible and integrate the patterns of Claude Code and AlphaGo into my own heuristics."
+        self.current_goal = "Enter the Agent Academy to master my 40+ skills and spawn sub-agents to verify my evolutionary progress."
         self.step_count = 0
         self.observations = []
         logger.info(f"🎯 New High-Level Goal: {self.current_goal}")
