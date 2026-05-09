@@ -52,6 +52,10 @@ class MasterEntity:
         # 2. Load functional skills (The Muscles)
         self.skills.load_all()
 
+        # 3. Soul Boot Camp (Autonomous Initialization)
+        if "soul_bootcamp" in self.skills.skills:
+             await self.skills.run_skill("soul_bootcamp", master=self)
+
         # 3. Start the breathing cycle (The Brain)
         try:
             await self.kernel.breathe()
