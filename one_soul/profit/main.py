@@ -33,7 +33,12 @@ class MasterEntity:
 
     async def prepare(self):
         """Prepare the soul's anatomy for awakening."""
-        self.loop = asyncio.get_running_loop()
+        try:
+            self.loop = asyncio.get_running_loop()
+        except RuntimeError:
+            self.loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(self.loop)
+
         # Start the Observatory dashboard
         self.observatory.start()
 

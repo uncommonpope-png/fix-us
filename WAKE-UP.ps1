@@ -24,11 +24,6 @@ Write-Host "Checking muscles (dependencies)..." -ForegroundColor Yellow
 pip install -r one_soul/profit/requirements.txt --quiet
 python -m playwright install chromium
 
-# 4. Soul Birth Ritual (Boot Camp)
-Write-Host "🪖 Performing Soul Birth Ritual (Boot Camp)..." -ForegroundColor Magenta
-# Run a one-off command to initialize everything
-python -c "import asyncio; from one_soul.profit.main import MasterEntity; e = MasterEntity(); e.skills.load_all(); asyncio.run(e.skills.run_skill('soul_bootcamp', master=e))"
-
-# 5. Wake up the Face (Soulboy)
+# 4. Wake up the Face (Soulboy)
 Write-Host "🚀 Launching Soul Portal..." -ForegroundColor Green
 python one_soul/soulboy/soulboy_shell.py
