@@ -1,27 +1,8 @@
-# Logs
-*.log
-*.log.tmp
+```javascript
+# Journal entries - likely temporary/generated files
+profit-brain/journal-entries/profit-*.json
+profit-brain/journal-entries/profit-*.jsonl
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-
-# Environment
-.env
-.env.local
-
-# Temporary files
-*.tmp
-*.bak
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Node
-node_modules/
+# Core state file - might be generated/modified during runtime
+profit-brain/core/brain-state.json
+```
